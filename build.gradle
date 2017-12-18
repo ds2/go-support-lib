@@ -1,0 +1,12 @@
+plugins {
+  id "ds2.gradle.plugins.golang" version "0.1.6"
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+go {
+    modules Arrays.asList('github.com/ds2/golang/sysinfo')
+}

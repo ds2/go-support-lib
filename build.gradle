@@ -2,7 +2,7 @@ plugins {
   id "ds2.gradle.plugins.golang" version "0.1.6"
 }
 
-group = 'ds2.golang.sysinfo'
+group = 'ds2.golang'
 version ='0.0.1-SNAPSHOT'
 
 repositories {

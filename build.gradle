@@ -11,5 +11,5 @@ repositories {
 }
 
 go {
-    modules Arrays.asList('github.com/ds2/sysinfo')
+    modules Arrays.asList('github.com/ds2/golang/sysinfo')
 }

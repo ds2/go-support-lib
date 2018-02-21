@@ -1,5 +1,5 @@
 plugins {
-  id "ds2.gradle.plugins.golang" version "0.1.6"
+  id "ds2.gradle.plugins.golang" version "0.1.8"
 }
 
 group = 'ds2.golang'
@@ -12,4 +12,5 @@ repositories {
 
 go {
     modules Arrays.asList('github.com/ds2/golang/sysinfo')
+    buildMode BuildMode.ARCHIVE
 }

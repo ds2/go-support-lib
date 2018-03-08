@@ -18,4 +18,6 @@ go get -pkgdir $PKGDIR -v github.com/ds2/golang/sysinfo
 # go build -v -x -buildmode=archive github.com/ds2/golang/sysinfo
 echo "Installing it"
 go install -pkgdir $PKGDIR -v github.com/ds2/golang/sysinfo
+echo "Run Doc server.."
+godoc -http=:6060
 echo "Done"

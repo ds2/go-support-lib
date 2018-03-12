@@ -8,10 +8,17 @@ func TestGetCPULoad(t *testing.T) {
 	}
 	var localData LocalDataDto
 	GetCPULoad(&localData)
-	if localData.AvailableMemory <= 0 {
-		t.Error("No Avail Mem")
-	}
 	if localData.CPULoad1 <= 0 {
 		t.Error("No CPU Load 1")
+	}
+}
+
+func TestGetNodeDetails(t *testing.T) {
+	var nodeDetails = GetNodeDetails()
+	if nodeDetails.TotalMemory <= 0 {
+		t.Error("No total mem found!")
+	}
+	if nodeDetails.AvailableMemory <= 0 {
+		t.Error("No avail mem found!")
 	}
 }

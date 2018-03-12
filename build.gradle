@@ -20,7 +20,7 @@ repositories {
 }
 
 go {
-    modules Arrays.asList('github.com/ds2/golang/sysinfo')
+    modules Arrays.asList('gitlab.com/ds_2/go_support-lib')
     //modules ['github.com/ds2/golang/sysinfo']
     buildMode='archive'
     verbose true

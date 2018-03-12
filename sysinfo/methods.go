@@ -19,6 +19,16 @@ import (
 	"github.com/shirou/gopsutil/net"
 )
 
+//GetNodeDetails returns all currently known information about this node.
+func GetNodeDetails() (data LocalDataDto) {
+	GetCPULoad(&data)
+	if mem, err := mem.VirtualMemory(); err == nil {
+		data.TotalMemory = mem.Total
+		data.AvailableMemory = mem.Available
+	}
+	return data
+}
+
 // GetDiskSizeInfo returns the disk info for a given linux path
 func GetDiskSizeInfo(thisPath string) (disk PathDiskInfo) {
 	fs := syscall.Statfs_t{}
@@ -30,13 +40,6 @@ func GetDiskSizeInfo(thisPath string) (disk PathDiskInfo) {
 	disk.Free = fs.Bfree * uint64(fs.Bsize)
 	disk.Used = disk.Size - disk.Free
 	return disk
-}
-
-func getTotalMemory() uint64 {
-	if mem, err := mem.VirtualMemory(); err == nil {
-		return mem.Total
-	}
-	return 0
 }
 
 /*

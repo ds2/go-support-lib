@@ -38,7 +38,6 @@ func GetDiskSizeInfo(thisPath string) (disk PathDiskInfo) {
 	}
 	disk.Size = fs.Blocks * uint64(fs.Bsize)
 	disk.Free = fs.Bfree * uint64(fs.Bsize)
-	disk.Used = disk.Size - disk.Free
 	return disk
 }
 
@@ -56,21 +55,6 @@ func GetCPULoad(s *LocalDataDto) {
 	s.CPULoad1 = cpuStat.Load1
 	s.CPULoad5 = cpuStat.Load5
 	s.CPULoad15 = cpuStat.Load15
-}
-
-// A simple String() method for the LocalDataDto struct.
-func (t *LocalDataDto) String() string {
-	var s string
-	s += "{"
-	s += "totalMem: " + string(t.TotalMemory)
-	s += ", availMem: " + string(t.AvailableMemory)
-	s += ", load1: " + strconv.FormatFloat(t.CPULoad1, 'f', 16, 64)
-	s += ", load5: " + strconv.FormatFloat(t.CPULoad5, 'f', 16, 64)
-	s += ", load15: " + strconv.FormatFloat(t.CPULoad15, 'f', 16, 64)
-	//s += ", load1: " + t.cpuLoad1
-	s += "}"
-	return s
-	//return fmt.Sprintf("%d/%g/%q", t.a, t.b, t.c)
 }
 
 func main() {}
@@ -180,4 +164,28 @@ func dealwithErr(err error) {
 		fmt.Println(err)
 		//os.Exit(-1)
 	}
+}
+
+func GetHostInfo() (hostInfo HostInfo) {
+	//check hostname
+	hostStat, err := host.Info()
+	dealwithErr(err)
+	hostInfo.Hostname = hostStat.Hostname
+	hostInfo.OsName = hostStat.OS
+	foundFSs, err := disk.Partitions(true)
+	dealwithErr(err)
+	var fsArray []PathDiskInfo
+	for _, thisFs := range foundFSs {
+		var thisInfo PathDiskInfo
+		log.Println("FS found: ", thisFs)
+		thisInfo.MountPath = thisFs.Mountpoint
+		thisInfo.fsType = thisFs.Fstype
+		thisInfo.device = thisFs.Device
+		var tempSizeData = GetDiskSizeInfo(thisFs.Mountpoint)
+		thisInfo.Size = tempSizeData.Size
+		thisInfo.Free = tempSizeData.Free
+		fsArray = append(fsArray, thisInfo)
+	}
+	hostInfo.Filesystems = fsArray
+	return hostInfo
 }

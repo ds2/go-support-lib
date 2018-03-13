@@ -1,6 +1,9 @@
 package sysinfo
 
-import "testing"
+import (
+	"log"
+	"testing"
+)
 
 func TestGetCPULoad(t *testing.T) {
 	if testing.Short() {
@@ -21,4 +24,9 @@ func TestGetNodeDetails(t *testing.T) {
 	if nodeDetails.AvailableMemory <= 0 {
 		t.Error("No avail mem found!")
 	}
+}
+
+func TestGetHostInfo(t *testing.T) {
+	myHostInfo := GetHostInfo()
+	log.Println("MyInfo: ", myHostInfo)
 }

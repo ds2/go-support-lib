@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package sysinfo;
+
+message PartitionInfo {
+    string MountPath=1;
+    uint64	size=2;
+    uint64 free=3;
+   string 	fsType=4;
+    string 	device=5;
+}
+
+message HostInfo {
+  string HostName = 1;
+  string osName=2;
+  string osVersion=3;
+  uint32 numCores=4;
+  repeated PartitionInfo fileSystems=5;
+}
+
+message HealthInfo {
+    uint64 totalMemory=1;
+    uint64	availableMemory=2;
+    double	cpuLoad1=3;
+    double	cpuLoad5=4;
+    double cpuLoad15=5;
+}

@@ -17,7 +17,7 @@ type PathDiskInfo struct {
 	device    string `json:"deviceName,omitempty"`
 }
 
-func (t *PathDiskInfo) String() string {
+func (t PathDiskInfo) String() string {
 	return fmt.Sprintf("{mountPath: %s, size: %d, free: %d}", t.MountPath, t.Size, t.Free)
 }
 
@@ -33,7 +33,7 @@ type LocalDataDto struct {
 }
 
 // A simple String() method for the LocalDataDto struct.
-func (t *LocalDataDto) String() string {
+func (t LocalDataDto) String() string {
 	var s string
 	s += "{"
 	s += "totalMem: " + string(t.TotalMemory)
@@ -48,11 +48,13 @@ func (t *LocalDataDto) String() string {
 }
 
 type HostInfo struct {
-	Hostname    string         `json:"hostName"`
-	OsName      string         `json:"osName"`
+	Hostname    string         `json:"hostName,omitempty"`
+	OsName      string         `json:"osName,omitempty"`
+	OsVersion   string         `json:"osVersion,omitmepty"`
+	NumCores    int            `json:"numberOfCores,omitempty"`
 	Filesystems []PathDiskInfo `json:"fileSystems,omitempty"`
 }
 
-func (t *HostInfo) String() string {
-	return fmt.Sprintf("HostInfo: %+v", *t)
+func (t HostInfo) String() string {
+	return fmt.Sprintf("hostname=%s, os=%s %s, cores=%d, fs=%v", t.Hostname, t.OsName, t.OsVersion, t.NumCores, t.Filesystems)
 }

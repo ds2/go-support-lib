@@ -1,23 +1,25 @@
-package sysinfo
+package tests
 
 import (
 	"log"
 	"testing"
+
+	"gitlab.com/ds_2/go-support-lib/sysinfo"
 )
 
 func TestGetCPULoad(t *testing.T) {
 	if testing.Short() {
 		t.Skip("Skipping CPULoad Test")
 	}
-	var localData LocalDataDto
-	GetCPULoad(&localData)
+	var localData sysinfo.LocalDataDto
+	sysinfo.GetCPULoad(&localData)
 	if localData.CPULoad1 <= 0 {
 		t.Error("No CPU Load 1")
 	}
 }
 
 func TestGetNodeDetails(t *testing.T) {
-	var nodeDetails = GetNodeDetails()
+	var nodeDetails = sysinfo.GetNodeDetails()
 	if nodeDetails.TotalMemory <= 0 {
 		t.Error("No total mem found!")
 	}
@@ -27,6 +29,6 @@ func TestGetNodeDetails(t *testing.T) {
 }
 
 func TestGetHostInfo(t *testing.T) {
-	myHostInfo := GetHostInfo()
+	myHostInfo := sysinfo.GetHostInfo()
 	log.Println("MyInfo: ", myHostInfo)
 }

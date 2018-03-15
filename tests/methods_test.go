@@ -11,10 +11,16 @@ func TestGetCPULoad(t *testing.T) {
 	if testing.Short() {
 		t.Skip("Skipping CPULoad Test")
 	}
-	var localData sysinfo.LocalDataDto
+	var localData sysinfo.HealthInfo
 	sysinfo.GetCPULoad(&localData)
-	if localData.CPULoad1 <= 0 {
+	if localData.CpuLoad1 <= 0 {
 		t.Error("No CPU Load 1")
+	}
+	if localData.CpuLoad5 <= 0 {
+		t.Error("No CPU Load 5")
+	}
+	if localData.CpuLoad15 <= 0 {
+		t.Error("No CPU Load 15")
 	}
 }
 

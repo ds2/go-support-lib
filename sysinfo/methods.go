@@ -20,7 +20,7 @@ import (
 )
 
 //GetNodeDetails returns all currently known information about this node.
-func GetNodeDetails() (data LocalDataDto) {
+func GetNodeDetails() (data HealthInfo) {
 	GetCPULoad(&data)
 	if mem, err := mem.VirtualMemory(); err == nil {
 		data.TotalMemory = mem.Total
@@ -30,7 +30,7 @@ func GetNodeDetails() (data LocalDataDto) {
 }
 
 // GetDiskSizeInfo returns the disk info for a given linux path
-func GetDiskSizeInfo(thisPath string) (disk PathDiskInfo) {
+func GetDiskSizeInfo(thisPath string) (disk PartitionInfo) {
 	fs := syscall.Statfs_t{}
 	err := syscall.Statfs(thisPath, &fs)
 	if err != nil {
@@ -44,7 +44,7 @@ func GetDiskSizeInfo(thisPath string) (disk PathDiskInfo) {
 /*
 GetCPULoad will analyze the cpu load of this node and write the data into the given LocalDataDto.
 */
-func GetCPULoad(s *LocalDataDto) {
+func GetCPULoad(s *HealthInfo) {
 	cpuStat, err := load.Avg()
 	if err != nil {
 		panic(err)
@@ -52,9 +52,9 @@ func GetCPULoad(s *LocalDataDto) {
 	log.Println("Load1: ", cpuStat.Load1)
 	log.Println("Load5: ", cpuStat.Load5)
 	log.Println("Load15: ", cpuStat.Load15)
-	s.CPULoad1 = cpuStat.Load1
-	s.CPULoad5 = cpuStat.Load5
-	s.CPULoad15 = cpuStat.Load15
+	s.CpuLoad1 = cpuStat.Load1
+	s.CpuLoad5 = cpuStat.Load5
+	s.CpuLoad15 = cpuStat.Load15
 }
 
 func main() {}
@@ -170,25 +170,25 @@ func GetHostInfo() (hostInfo HostInfo) {
 	//check hostname
 	hostStat, err := host.Info()
 	dealwithErr(err)
-	hostInfo.Hostname = hostStat.Hostname
+	hostInfo.HostName = hostStat.Hostname
 	hostInfo.OsName = hostStat.OS
 	hostInfo.OsVersion = hostStat.PlatformVersion
 	foundFSs, err := disk.Partitions(true)
-	hostInfo.NumCores = runtime.NumCPU()
+	hostInfo.NumCores = uint32(runtime.NumCPU())
 	log.Println("DBG: version=", runtime.Version())
 	dealwithErr(err)
-	var fsArray []PathDiskInfo
+	var fsArray []*PartitionInfo
 	for _, thisFs := range foundFSs {
-		var thisInfo PathDiskInfo
+		var thisInfo PartitionInfo
 		log.Println("FS found: ", thisFs)
 		thisInfo.MountPath = thisFs.Mountpoint
-		thisInfo.fsType = thisFs.Fstype
-		thisInfo.device = thisFs.Device
+		thisInfo.FsType = thisFs.Fstype
+		thisInfo.Device = thisFs.Device
 		var tempSizeData = GetDiskSizeInfo(thisFs.Mountpoint)
 		thisInfo.Size = tempSizeData.Size
 		thisInfo.Free = tempSizeData.Free
-		fsArray = append(fsArray, thisInfo)
+		fsArray = append(fsArray, &thisInfo)
 	}
-	hostInfo.Filesystems = fsArray
+	hostInfo.FileSystems = fsArray
 	return hostInfo
 }

@@ -38,3 +38,4 @@ pkg
 # Terraform
 *.tftstate
 terraform.tfplan
+vendor

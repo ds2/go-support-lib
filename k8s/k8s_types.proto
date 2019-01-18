@@ -5,15 +5,16 @@ import "google/protobuf/any.proto";
 package k8s;
 
 message NodeList {
-    string apiVersion=1;
-    repeated Node items=2;
-    ListMeta metadata=3;
+    string kind = 1;
+    string apiVersion = 2;
+    repeated Node items = 3;
+    ListMeta metadata = 4;
 }
 
 message ListMeta {
-    string continue=1;
-    string resourceVersion=2;
-    string selfLink=3;
+    string continue = 1;
+    string resourceVersion = 2;
+    string selfLink = 3;
 }
 
 message Node {
@@ -81,11 +82,13 @@ message ObjectMeta {
 
 message NodeAddress {
     string address = 1;
-    NodeAddressType type = 2;
+    string type = 2;
 }
 
 enum NodeAddressType {
     Hostname = 0;
     ExternalIP = 1;
     InternalIP = 3;
+    ExternalDNS = 4;
+    InternalDNS = 5;
 }

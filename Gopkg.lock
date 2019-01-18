@@ -21,15 +21,14 @@
   version = "v1.2.2"
 
 [[projects]]
-  digest = "1:8e61458e9fd6d83dbc2d9796534e180e5bf478b1845b25dd2bf5e52b116c52c3"
+  digest = "1:00128d98b4ccf1e335a8ee2c2b7676a9c7439e5a93dae0a701bb849b0cc536f4"
   name = "github.com/golang/protobuf"
   packages = [
     "proto",
     "ptypes/any",
   ]
   pruneopts = "UT"
-  revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
-  version = "v1.2.0"
+  revision = "347cf4a86c1cb8d262994d8ef5924d4576c5b331"
 
 [[projects]]
   digest = "1:0a69a1c0db3591fcefb47f115b224592c8dfa4368b7ba9fae509d5e16cdc95c8"
@@ -55,14 +54,6 @@
   pruneopts = "UT"
   revision = "0f70a4a06f7a1039305ec9b3ba9c2800f8929fba"
   version = "v2.18.11"
-
-[[projects]]
-  branch = "master"
-  digest = "1:99c6a6dab47067c9b898e8c8b13d130c6ab4ffbcc4b7cc6236c2cd0b1e344f5b"
-  name = "github.com/shirou/w32"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "bb4de0191aa41b5507caa14b0650cdbddcd9280b"
 
 [[projects]]
   digest = "1:87c2e02fb01c27060ccc5ba7c5a407cc91147726f8f40b70cceeedbc52b1f3a8"

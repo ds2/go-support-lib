@@ -4,7 +4,11 @@ Some helpful functions.
 
 ## Protocol Buffers
 
+Install Protobuffers version via:
+
+    go get -buildmode=default github.com/golang/protobuf
+
 To generate the stubs, run inside the respective directory:
 
-    protoc --go_out=. k8s/k8s_types.proto
-    protoc --go_out=. sysinfo/types.proto
+    protoc --go_out=. k8s/*.proto
+    protoc --go_out=. sysinfo/*.proto

@@ -27,7 +27,7 @@
 
 [[constraint]]
   name = "github.com/golang/protobuf"
-  version = "1.2.0"
+  revision = "347cf4a86c1cb8d262994d8ef5924d4576c5b331"
 
 [[constraint]]
   name = "github.com/shirou/gopsutil"

@@ -6,4 +6,5 @@ Some helpful functions.
 
 To generate the stubs, run inside the respective directory:
 
-    protoc --go_out=. k8s_types.proto
+    protoc --go_out=. k8s/k8s_types.proto
+    protoc --go_out=. sysinfo/types.proto

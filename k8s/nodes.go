@@ -11,7 +11,8 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func GetNodeList(clusterEndpoint string, limit int, authToken string, certClientFile string) (result []string) {
+// Returns the internal ip addresses of all known nodes of the cluster.
+func GetNodesInternalIpAddresses(clusterEndpoint string, limit int, authToken string, certClientFile string) (result []string) {
 	var nodeUrl = clusterEndpoint + "/api/v1/nodes?limit=" + strconv.Itoa(limit) + "&pretty=true"
 	logrus.Debug("URL to use is: ", nodeUrl)
 	var cert tls.Certificate

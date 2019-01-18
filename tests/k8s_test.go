@@ -17,9 +17,9 @@ func init() {
 
 func TestGetNodeList(t *testing.T) {
 	if testing.Short() {
-		t.Skip("Skipping GetNodeList Test")
+		t.Skip("Skipping GetNodesInternalIpAddresses Test")
 	}
-	nodes := k8s.GetNodeList(*awsUrl, 10, *k8sAccessToken, "")
+	nodes := k8s.GetNodesInternalIpAddresses(*awsUrl, 10, *k8sAccessToken, "")
 
 	if nodes == nil || len(nodes) <= 0 {
 		t.Error("No nodes are returned!")

@@ -50,7 +50,7 @@ func GetNodeList(clusterEndpoint string, limit int, authToken string, certClient
 	logrus.Debug("Return length: ", body.ContentLength)
 	var nodeListData NodeList
 	var bodyBytes, _ = ioutil.ReadAll(body.Body)
-	ioutil.WriteFile("awsResponse.json", bodyBytes, 0644)
+	ioutil.WriteFile(".awsResponse.json", bodyBytes, 0644)
 	bodyString := string(bodyBytes)
 	logrus.Debug("Response: ", bodyString)
 	err = json.Unmarshal(bodyBytes, &nodeListData)
@@ -74,5 +74,6 @@ func GetNodeList(clusterEndpoint string, limit int, authToken string, certClient
 			}
 		}
 	}
+	logrus.Debug("Result: ", result)
 	return result
 }

@@ -1,0 +1,91 @@
+syntax = "proto3";
+
+import "google/protobuf/any.proto";
+
+package k8s;
+
+message NodeList {
+    string apiVersion=1;
+    repeated Node items=2;
+    ListMeta metadata=3;
+}
+
+message ListMeta {
+    string continue=1;
+    string resourceVersion=2;
+    string selfLink=3;
+}
+
+message Node {
+    string apiVersion = 1;
+    string kind = 2;
+    ObjectMeta metadata = 3;
+    NodeSpec spec = 4;
+    NodeStatus status = 5;
+}
+
+message NodeSpec {
+    string externalID = 1;
+    string podCIDR = 2;
+    string providerID = 3;
+    bool unschedulable = 4;
+}
+
+message NodeStatus {
+    repeated NodeAddress addresses = 1;
+    google.protobuf.Any allocatable = 2;
+    google.protobuf.Any capacity = 3;
+    repeated NodeCondition conditions = 4;
+    // daemonEndpoints=5
+    repeated ContainerImage images = 6;
+    NodeSystemInfo nodeInfo = 7;
+    string phase = 8;
+    repeated AttachedVolume volumesAttached = 9;
+    repeated string volumesInUse = 10;
+}
+
+message NodeCondition {
+
+}
+
+message ContainerImage {
+
+}
+
+message NodeSystemInfo {
+
+}
+
+message AttachedVolume {
+
+}
+
+message ObjectMeta {
+    google.protobuf.Any annotations = 1;
+    string clusterName = 2;
+    string creationTimestamp = 3;
+    int32 deletionGracePeriodSeconds = 4;
+    string deletionTimestamp = 5;
+    repeated string finalizers = 6;
+    string generateName = 7;
+    int32 generation = 8;
+    google.protobuf.Any initializers = 9;
+    google.protobuf.Any labels = 10;
+    string name = 11;
+    string namespace = 12;
+    repeated google.protobuf.Any ownerReferences = 13;
+    string resourceVersion = 14;
+    string selfLink = 15;
+    string uid = 16;
+}
+
+message NodeAddress {
+    string address = 1;
+    NodeAddressType type = 2;
+}
+
+enum NodeAddressType {
+    Hostname = 0;
+    ExternalIP = 1;
+    InternalIP = 3;
+}

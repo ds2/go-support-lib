@@ -1,6 +1,7 @@
 package aws
 
 import (
+	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/elbv2"
 	"github.com/sirupsen/logrus"
 	"gitlab.com/ds_2/go-support-lib/common"
@@ -63,8 +64,12 @@ func GetElbTargetGroupsArns(elbSvc *elbv2.ELBV2, elbName string) (tgArns []strin
 	return tgArns
 }
 
+func GetElbInstanceHealthViaSession(session *session.Session, elbName string, instanceIds []string) common.State {
+	return GetElbInstanceHealth(elbv2.New(session), elbName, instanceIds)
+}
+
 //Returns the common health state of the targets of the given load balancer.
-func GetElbInstanceHealth(elbSvc *elbv2.ELBV2, elbName string, instanceIds ...string) (state common.State) {
+func GetElbInstanceHealth(elbSvc *elbv2.ELBV2, elbName string, instanceIds []string) (state common.State) {
 	state = common.State_Unknown
 	tgArn := GetElbTargetGroupsArns(elbSvc, elbName)
 	var targetDescriptions []*elbv2.TargetDescription

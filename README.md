@@ -13,3 +13,5 @@ To generate the stubs, run inside the respective directory:
     protoc --go_out=. common/*.proto
     protoc --go_out=. k8s/*.proto
     protoc --go_out=. sysinfo/*.proto
+
+## Build as library

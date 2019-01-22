@@ -38,7 +38,7 @@ func TestTargetHealth(t *testing.T) {
 		SharedConfigState: session.SharedConfigEnable,
 	}))
 	elbSvc := elbv2.New(awsSession)
-	state := aws.GetElbTargetHealth(elbSvc, *elbName)
+	state := aws.GetElbInstanceHealth(elbSvc, *elbName, )
 	assert.NotNil(t, state, "State is null")
 	assert.NotEqual(t, common.State_Unknown, state, "State is unknown from the given target!")
 }

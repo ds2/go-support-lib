@@ -64,11 +64,18 @@ func GetElbTargetGroupsArns(elbSvc *elbv2.ELBV2, elbName string) (tgArns []strin
 }
 
 //Returns the common health state of the targets of the given load balancer.
-func GetElbTargetHealth(elbSvc *elbv2.ELBV2, elbName string) (state common.State) {
+func GetElbInstanceHealth(elbSvc *elbv2.ELBV2, elbName string, instanceIds ...string) (state common.State) {
 	state = common.State_Unknown
 	tgArn := GetElbTargetGroupsArns(elbSvc, elbName)
+	var targetDescriptions []*elbv2.TargetDescription
+	for _, instId := range instanceIds {
+		targetDescriptions = append(targetDescriptions, &elbv2.TargetDescription{
+			Id: &instId,
+		})
+	}
 	targetHealthResponse, err := elbSvc.DescribeTargetHealth(&elbv2.DescribeTargetHealthInput{
 		TargetGroupArn: &tgArn[0],
+		Targets:        targetDescriptions,
 	})
 	if !handleAwsError(err, "Error when trying to get the target health", false) {
 		countTargets := len(targetHealthResponse.TargetHealthDescriptions)
@@ -84,6 +91,7 @@ func GetElbTargetHealth(elbSvc *elbv2.ELBV2, elbName string) (state common.State
 					state = common.State_Active
 				case "unhealthy":
 					state = common.State_Error
+					break
 				default:
 					logrus.Warn("Unmapped state: ", stateStr)
 				}

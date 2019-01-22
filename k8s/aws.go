@@ -1,7 +1,7 @@
 package k8s
 
 import (
-	"fmt"
+	"encoding/json"
 	"log"
 
 	"os/exec"
@@ -25,11 +25,19 @@ func GetAwsK8sAccessToken(k8sClusterId string) (accessToken string) {
 }
 
 func GetTokenViaAwsIamAuthenticatorClient(k8sClusterId string) (accesstoken string) {
-	//aws-iam-authenticator
+	logrus.Debugln("Trying to get token for cluster ", k8sClusterId)
 	out, err := exec.Command("aws-iam-authenticator", "token", "-i", k8sClusterId).Output()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Error occurred: ", err, ": ", out)
 	}
-	fmt.Printf("The date is %s\n", out)
+	//response is a json string
+	var answer AwsIamAuthenticatorResponse
+	err = json.Unmarshal(out, &answer)
+	if err != nil {
+		log.Fatalln("Error when trying to unmarshal the received data from the aws iam authenticator: ", err)
+	}
+	logrus.Debugln("Answer looks like: ", answer)
+	accesstoken = answer.Status.Token
+	logrus.Debugln("The accessToken might be: ", accesstoken)
 	return accesstoken
 }

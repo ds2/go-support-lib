@@ -15,3 +15,4 @@ To generate the stubs, run inside the respective directory:
     protoc --go_out=. sysinfo/*.proto
 
 ## Build as library
+

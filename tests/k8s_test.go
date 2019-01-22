@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/sirupsen/logrus"
+	"github.com/stretchr/testify/assert"
 	"gitlab.com/ds_2/go-support-lib/k8s"
 )
 
@@ -36,4 +37,10 @@ func TestAwsEksNodeList(t *testing.T) {
 	if nodes == nil || len(nodes) <= 0 {
 		t.Error("No nodes are returned!")
 	}
+}
+
+func TestGetAwsIamToken(t *testing.T){
+	token:=k8s.GetTokenViaAwsIamAuthenticatorClient(*awsK8sClusterId)
+	assert.NotNil(t, token, "Token is null")
+	assert.NotEmpty(t, token, "Token is empty")
 }

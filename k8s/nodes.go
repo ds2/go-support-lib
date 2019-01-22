@@ -12,8 +12,8 @@ import (
 )
 
 // Returns the internal ip addresses of all known nodes of the cluster.
-func GetNodesInternalIpAddresses(clusterEndpoint string, limit int, authToken string, certClientFile string) (result []string) {
-	var nodeUrl = clusterEndpoint + "/api/v1/nodes?limit=" + strconv.Itoa(limit) + "&pretty=true"
+func GetNodesInternalIpAddresses(clusterEndpoint string, limit uint, authToken string, certClientFile string) (result []string) {
+	var nodeUrl = clusterEndpoint + "/api/v1/nodes?limit=" + strconv.Itoa(int(limit)) + "&pretty=true"
 	logrus.Debug("URL to use is: ", nodeUrl)
 	var cert tls.Certificate
 	if len(certClientFile) > 0 {
@@ -38,7 +38,7 @@ func GetNodesInternalIpAddresses(clusterEndpoint string, limit int, authToken st
 		logrus.Fatal("Could not setup http client! ", err)
 	}
 	if len(authToken) > 0 {
-		logrus.Debug("Adding bearer token..")
+		logrus.Debug("Adding bearer token..", authToken)
 		req.Header.Set("Authorization", "Bearer "+authToken)
 	}
 	var body, err2 = httpClient.Do(req)
@@ -53,6 +53,10 @@ func GetNodesInternalIpAddresses(clusterEndpoint string, limit int, authToken st
 	var bodyBytes, _ = ioutil.ReadAll(body.Body)
 	ioutil.WriteFile(".awsResponse.json", bodyBytes, 0644)
 	bodyString := string(bodyBytes)
+	if body.StatusCode >= 400 {
+		logrus.Error("No result data found!")
+		return nil
+	}
 	logrus.Debug("Response: ", bodyString)
 	err = json.Unmarshal(bodyBytes, &nodeListData)
 	if err != nil {

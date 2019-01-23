@@ -72,6 +72,9 @@ func GetElbInstanceHealthViaSession(session *session.Session, elbName string, in
 func GetElbInstanceHealth(elbSvc *elbv2.ELBV2, elbName string, instanceIds []string) (state common.State) {
 	state = common.State_Unknown
 	tgArn := GetElbTargetGroupsArns(elbSvc, elbName)
+	if len(tgArn) <= 0 {
+		logrus.Errorln("No targetGroups found for ELB ", elbName)
+	}
 	var targetDescriptions []*elbv2.TargetDescription
 	for _, instId := range instanceIds {
 		targetDescriptions = append(targetDescriptions, &elbv2.TargetDescription{
@@ -96,6 +99,9 @@ func GetElbInstanceHealth(elbSvc *elbv2.ELBV2, elbName string, instanceIds []str
 					state = common.State_Active
 				case "unhealthy":
 					state = common.State_Error
+					break
+				case "initial":
+					state=common.State_New
 					break
 				default:
 					logrus.Warn("Unmapped state: ", stateStr)

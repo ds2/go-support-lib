@@ -16,3 +16,23 @@ To generate the stubs, run inside the respective directory:
 
 ## Build as library
 
+Use:
+
+    $ go build ./...
+    
+Tests via
+
+    $ go test ./...
+    
+## Module Handling
+
+    export GO111MODULE=on
+
+### Updating to latest patch/minor
+
+    go list -u -m all
+
+## Releasing
+
+    go mod tidy
+    go test all

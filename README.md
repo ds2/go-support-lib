@@ -18,11 +18,11 @@ To generate the stubs, run inside the respective directory:
 
 Use:
 
-    $ go build ./...
+    go build ./...
     
 Tests via
 
-    $ go test ./...
+    go test ./...
     
 ## Module Handling
 
@@ -35,4 +35,5 @@ Tests via
 ## Releasing
 
     go mod tidy
-    go test all
+    go test ./... # or to fully test all packages -> go test all
+    

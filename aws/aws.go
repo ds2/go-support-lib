@@ -37,7 +37,7 @@ func GetElbState(elbSvc *elbv2.ELBV2, elbName string) (state common.State) {
 }
 
 // Handles an AWS error somehow. Returns true if there was an error, otherwise false.
-func handleAwsError(error2 error, errorMsg string, fail bool) bool {
+func HandleAwsError(error2 error, errorMsg string, fail bool) bool {
 	if error2 != nil {
 		if fail {
 			logrus.Fatalln(errorMsg, error2.Error())
@@ -55,7 +55,7 @@ func GetElbTargetGroupsArns(elbSvc *elbv2.ELBV2, elbName string) (tgArns []strin
 	targetHealthResponse, err := elbSvc.DescribeTargetGroups(&elbv2.DescribeTargetGroupsInput{
 		LoadBalancerArn: &lbArn,
 	})
-	if !handleAwsError(err, "Error when getting the targetGroups for the given LB", false) {
+	if !HandleAwsError(err, "Error when getting the targetGroups for the given LB", false) {
 		for _, tg := range targetHealthResponse.TargetGroups {
 			tgArns = append(tgArns, *tg.TargetGroupArn)
 		}
@@ -85,7 +85,7 @@ func GetElbInstanceHealth(elbSvc *elbv2.ELBV2, elbName string, instanceIds []str
 		TargetGroupArn: &tgArn[0],
 		Targets:        targetDescriptions,
 	})
-	if !handleAwsError(err, "Error when trying to get the target health", false) {
+	if !HandleAwsError(err, "Error when trying to get the target health", false) {
 		countTargets := len(targetHealthResponse.TargetHealthDescriptions)
 		if countTargets <= 0 {
 			logrus.Warn("No targets found in ", tgArn)
@@ -101,7 +101,10 @@ func GetElbInstanceHealth(elbSvc *elbv2.ELBV2, elbName string, instanceIds []str
 					state = common.State_Error
 					break
 				case "initial":
-					state=common.State_New
+					state = common.State_New
+					break
+				case "unused":
+					state = common.State_Prepared
 					break
 				default:
 					logrus.Warn("Unmapped state: ", stateStr)

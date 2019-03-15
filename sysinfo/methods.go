@@ -175,7 +175,7 @@ func GetHostInfo() (hostInfo HostInfo) {
 	hostInfo.OsVersion = hostStat.PlatformVersion
 	foundFSs, err := disk.Partitions(true)
 	hostInfo.NumCores = uint32(runtime.NumCPU())
-	log.Println("DBG: version=", runtime.Version())
+	log.Println("version=", runtime.Version())
 	dealwithErr(err)
 	var fsArray []*PartitionInfo
 	for _, thisFs := range foundFSs {

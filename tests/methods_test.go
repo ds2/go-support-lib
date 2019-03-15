@@ -4,6 +4,7 @@ import (
 	"log"
 	"testing"
 
+	"github.com/stretchr/testify/assert"
 	"gitlab.com/ds_2/go-support-lib/sysinfo"
 )
 
@@ -32,9 +33,12 @@ func TestGetNodeDetails(t *testing.T) {
 	if nodeDetails.AvailableMemory <= 0 {
 		t.Error("No avail mem found!")
 	}
+	assert.NotNil(t, nodeDetails, "No details received!")
 }
 
 func TestGetHostInfo(t *testing.T) {
 	myHostInfo := sysinfo.GetHostInfo()
+	assert.NotNil(t, myHostInfo, "No host data found!")
+	assert.NotNil(t, myHostInfo.FileSystems)
 	log.Println("MyInfo: ", myHostInfo)
 }

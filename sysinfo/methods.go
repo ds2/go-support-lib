@@ -192,3 +192,7 @@ func GetHostInfo() (hostInfo HostInfo) {
 	hostInfo.FileSystems = fsArray
 	return hostInfo
 }
+
+//func GetProcessesInfo(pid int) []ProcessDetails{
+//	var process,err=os.FindProcess(pid)
+//}

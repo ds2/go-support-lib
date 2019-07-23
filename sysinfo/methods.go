@@ -29,6 +29,17 @@ func GetNodeDetails() (data HealthInfo) {
 	return data
 }
 
+func GetLocalNetworkInterfaces() error {
+	ifaces, err := net.Interfaces()
+	if err != nil {
+		return err
+	}
+	for _, value := range ifaces {
+		println("Network ", value)
+	}
+	return nil;
+}
+
 // GetDiskSizeInfo returns the disk info for a given linux path
 func GetDiskSizeInfo(thisPath string) (disk PartitionInfo) {
 	fs := syscall.Statfs_t{}

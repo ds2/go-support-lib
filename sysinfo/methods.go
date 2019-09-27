@@ -29,15 +29,29 @@ func GetNodeDetails() (data HealthInfo) {
 	return data
 }
 
-func GetLocalNetworkInterfaces() error {
+func GetLocalNetworkInterfaces() ([]NetworkInterfaceData, error) {
 	ifaces, err := net.Interfaces()
 	if err != nil {
-		return err
+		return nil, err
 	}
+	var nwData []NetworkInterfaceData
 	for _, value := range ifaces {
-		println("Network ", value)
+		//println("Network ", value)
+		var thisNwData = NetworkInterfaceData{}
+		thisNwData.DeviceName = value.Name
+		thisNwData.Mtu = uint32(value.MTU)
+		thisNwData.Name = value.Name
+		thisNwData.HwAddr = value.HardwareAddr
+		thisNwData.Type = NetworkInterfaceType_ETHERNET
+		nwData = append(nwData, thisNwData)
+		for _, ifAddr := range value.Addrs {
+			addr := IpAddress{}
+			addr.Address = ifAddr.Addr
+			addr.Type = IpAddressType_UNKNOWN_IPADDR_TYPE
+			thisNwData.Address = append(thisNwData.Address, &addr)
+		}
 	}
-	return nil;
+	return nwData, nil
 }
 
 // GetDiskSizeInfo returns the disk info for a given linux path

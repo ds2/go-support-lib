@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package docker;
+
+message ContainerInfo {
+    string id=1;
+    string image=2;
+    int64 started=3;
+}

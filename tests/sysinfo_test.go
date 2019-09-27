@@ -42,3 +42,12 @@ func TestGetHostInfo(t *testing.T) {
 	assert.NotNil(t, myHostInfo.FileSystems)
 	log.Println("MyInfo: ", myHostInfo)
 }
+
+func TestGetInterfaces(t *testing.T){
+	var myIFs, _ =sysinfo.GetLocalNetworkInterfaces()
+	assert.True(t, len(myIFs)>0)
+	log.Println("Networks: ")
+	for idx, myIF := range myIFs {
+		log.Println("Network ",idx,": ",myIF)
+	}
+}

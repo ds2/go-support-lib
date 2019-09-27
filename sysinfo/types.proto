@@ -10,6 +10,32 @@ message PartitionInfo {
     string device = 5;
 }
 
+enum IpAddressType {
+    UNKNOWN_IPADDR_TYPE = 0;
+    IPv4 = 1;
+    IPv6 = 2;
+}
+
+message IpAddress {
+    string address = 1;
+    IpAddressType type = 2;
+}
+
+enum NetworkInterfaceType {
+    UNKNOWN = 0;
+    ETHERNET = 1;
+    WIRELESS = 2;
+}
+
+message NetworkInterfaceData {
+    string name = 1;
+    string deviceName = 2;
+    NetworkInterfaceType type = 3;
+    string hwAddr = 4;
+    uint32 mtu = 5;
+    repeated IpAddress address = 6;
+}
+
 message HostInfo {
     string HostName = 1;
     string osName = 2;

@@ -20,6 +20,7 @@ To generate the stubs, run inside the respective directory:
 ### Update dependencies
 
     export GO111MODULE=on
+    go clean -modcache
     go list -u -m all
 
 Use:

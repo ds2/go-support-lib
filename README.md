@@ -1,4 +1,4 @@
-# DS/2 Go Support Lib
+# Go Support Lib
 
 Some helpful functions.
 
@@ -24,7 +24,7 @@ To generate the stubs, run inside the respective directory:
 
 Use:
 
-    go build ./...
+    go build -race ./...
     
 Tests via
 
@@ -33,4 +33,5 @@ Tests via
 ## Releasing
 
     go mod tidy
+    go mod verify
     go test ./... # or to fully test all packages -> go test all

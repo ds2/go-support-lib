@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #export GOPATH=/Users/dstrauss/git/ds2-golang-lib::/Users/dstrauss/git/ds2-golang-lib/src
 export GOPATH=`pwd`:`pwd`/sysinfo

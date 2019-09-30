@@ -49,3 +49,27 @@ func GetExecutingSeconds(startSecondsUnix int64, nowTime time.Time) uint64 {
 	logrus.Debug("Duration in seconds is ", durationInSeconds)
 	return durationInSeconds
 }
+
+func StopContainer(containerId string, maxWaitTime time.Duration) {
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
+	ctx := context.Background()
+	errContainerStop := cli.ContainerStop(ctx, containerId, &maxWaitTime)
+	if errContainerStop != nil {
+		logrus.Warn("Could not stop container ", containerId, " due to: ", errContainerStop)
+	}
+}
+
+func TerminateContainer(containerId string){
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
+	ctx := context.Background()
+	errContainerStop := cli.ContainerKill(ctx, containerId, "KILL")
+	if errContainerStop != nil {
+		logrus.Warn("Could not kill container ", containerId, " due to: ", errContainerStop)
+	}
+}

@@ -1,3 +1,7 @@
+[![pipeline status](https://gitlab.com/ds_2/go-support-lib/badges/master/pipeline.svg)](https://gitlab.com/ds_2/go-support-lib/commits/master)
+[![coverage report](https://gitlab.com/ds_2/go-support-lib/badges/master/coverage.svg)](https://gitlab.com/ds_2/go-support-lib/commits/master)
+
+
 # Go Support Lib
 
 Some helpful functions.

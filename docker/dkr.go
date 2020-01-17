@@ -2,7 +2,6 @@ package docker
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/docker/docker/api/types"
@@ -16,7 +15,7 @@ func GetCurrentContainers() []ContainerInfo {
 	}
 	cli, err := client.NewEnvClient()
 	if err != nil {
-		panic(err)
+		logrus.Panic("Error when setting up the new client: ", err)
 	}
 	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
 	if err != nil {
@@ -24,7 +23,7 @@ func GetCurrentContainers() []ContainerInfo {
 	}
 
 	for _, container := range containers {
-		fmt.Printf("%s %s\n", container.ID[:10], container.Image)
+		logrus.Debugln(container.ID[:10], " and image=",container.Image, "with labels=",container.Labels)
 		var thisInfo = ContainerInfo{
 			Id:              container.ID,
 			Image:           container.Image,
@@ -35,7 +34,7 @@ func GetCurrentContainers() []ContainerInfo {
 			State:           container.State,
 			Status:          container.Status,
 		}
-		fmt.Println("Info about this container is: ", thisInfo)
+		logrus.Infoln("Info about this container is:", thisInfo)
 		rc = append(rc, thisInfo)
 	}
 	return rc

@@ -23,7 +23,7 @@ func GetCurrentContainers() []ContainerInfo {
 	}
 
 	for _, container := range containers {
-		logrus.Debugln(container.ID[:10], " and image=",container.Image, "with labels=",container.Labels)
+		logrus.Debugln(container.ID[:10], " and image=", container.Image, "with labels=", container.Labels)
 		var thisInfo = ContainerInfo{
 			Id:              container.ID,
 			Image:           container.Image,
@@ -54,13 +54,13 @@ func GetExecutingSeconds(startSecondsUnix int64, nowTime time.Time) uint64 {
 	return durationInSeconds
 }
 
-func StopContainer(containerId string, maxWaitTime time.Duration) bool {
+func StopContainer(containerId string, maxWaitTime *time.Duration) bool {
 	cli, err := client.NewEnvClient()
 	if err != nil {
 		panic(err)
 	}
 	ctx := context.Background()
-	errContainerStop := cli.ContainerStop(ctx, containerId, &maxWaitTime)
+	errContainerStop := cli.ContainerStop(ctx, containerId, maxWaitTime)
 	if errContainerStop != nil {
 		logrus.Warn("Could not stop container ", containerId, " due to: ", errContainerStop)
 		return false
@@ -78,6 +78,13 @@ func TerminateContainer(containerId string) bool {
 	if errContainerStop != nil {
 		logrus.Warn("Could not kill container ", containerId, " due to: ", errContainerStop)
 		return false
+	}
+	return true
+}
+
+func StopAndTerminateContainer(containerId string, maxWaitTime *time.Duration) bool {
+	if !StopContainer(containerId, maxWaitTime) {
+		return TerminateContainer(containerId)
 	}
 	return true
 }

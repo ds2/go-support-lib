@@ -3,9 +3,7 @@ package k8s
 import (
 	"encoding/json"
 	"log"
-
 	"os/exec"
-
 	"github.com/kubernetes-sigs/aws-iam-authenticator/pkg/token"
 	"github.com/sirupsen/logrus"
 )

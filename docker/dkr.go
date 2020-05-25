@@ -2,7 +2,6 @@ package docker
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/docker/docker/api/types"
@@ -16,7 +15,7 @@ func GetCurrentContainers() []ContainerInfo {
 	}
 	cli, err := client.NewEnvClient()
 	if err != nil {
-		panic(err)
+		logrus.Panic("Error when setting up the new client: ", err)
 	}
 	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
 	if err != nil {
@@ -24,13 +23,18 @@ func GetCurrentContainers() []ContainerInfo {
 	}
 
 	for _, container := range containers {
-		fmt.Printf("%s %s\n", container.ID[:10], container.Image)
+		logrus.Debugln(container.ID[:10], " and image=", container.Image, "with labels=", container.Labels)
 		var thisInfo = ContainerInfo{
-			Id:      container.ID,
-			Image:   container.Image,
-			Started: container.Created,
+			Id:              container.ID,
+			Image:           container.Image,
+			Started:         container.Created,
+			Names:           container.Names,
+			Imageid:         container.ImageID,
+			InternalCommand: container.Command,
+			State:           container.State,
+			Status:          container.Status,
 		}
-		fmt.Println("Info about this container is: ", thisInfo)
+		logrus.Infoln("Info about this container is:", thisInfo)
 		rc = append(rc, thisInfo)
 	}
 	return rc
@@ -48,4 +52,40 @@ func GetExecutingSeconds(startSecondsUnix int64, nowTime time.Time) uint64 {
 	var durationInSeconds = uint64(duration.Seconds())
 	logrus.Debug("Duration in seconds is ", durationInSeconds)
 	return durationInSeconds
+}
+
+func StopContainer(containerId string, maxWaitTime *time.Duration) bool {
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
+	ctx := context.Background()
+	errContainerStop := cli.ContainerStop(ctx, containerId, maxWaitTime)
+	if errContainerStop != nil {
+		logrus.Warn("Could not stop container ", containerId, " due to: ", errContainerStop)
+		return false
+	}
+	return true
+}
+
+func TerminateContainer(containerId string) bool {
+	cli, err := client.NewEnvClient()
+	if err != nil {
+		panic(err)
+	}
+	ctx := context.Background()
+	errContainerStop := cli.ContainerKill(ctx, containerId, "KILL")
+	if errContainerStop != nil {
+		logrus.Warn("Could not kill container ", containerId, " due to: ", errContainerStop)
+		return false
+	}
+	return true
+}
+
+func StopAndTerminateContainer(containerId string, maxWaitTime *time.Duration) bool {
+	if !StopContainer(containerId, maxWaitTime) {
+		logrus.Warn("Could not stop the container, will now try to terminate it.")
+		return TerminateContainer(containerId)
+	}
+	return true
 }

@@ -96,10 +96,17 @@ enum NodeAddressType {
 message AwsIamAuthenticatorResponse {
     string kind = 1;
     string apiVersion = 2;
-    AwsIamAuthenticatorStatus status=3;
+    AwsIamAuthenticatorStatus status = 3;
 }
 
 message AwsIamAuthenticatorStatus {
     string expirationTimestamp = 1;
     string token = 2;
+}
+
+message RolloutImageDetails {
+    string namespace = 1;
+    string deploymentName = 2;
+    string containerName = 3;
+    string imageWithTag = 4;
 }

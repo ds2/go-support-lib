@@ -84,6 +84,7 @@ func TerminateContainer(containerId string) bool {
 
 func StopAndTerminateContainer(containerId string, maxWaitTime *time.Duration) bool {
 	if !StopContainer(containerId, maxWaitTime) {
+		logrus.Warn("Could not stop the container, will now try to terminate it.")
 		return TerminateContainer(containerId)
 	}
 	return true

@@ -16,9 +16,11 @@ extensions.getByType(com.pivotstir.gogradle.GoPluginExtension::class).apply {
         useSandbox = false
     }
 
+    /*
     build {
         packagePaths = listOf("./...")
     }
+    */
 
     dep {
         thirdpartyIgnored = true
@@ -33,9 +35,6 @@ extensions.getByType(com.pivotstir.gogradle.GoPluginExtension::class).apply {
 tasks.register<com.pivotstir.gogradle.tasks.GoBuild>("build") {
     group = "Build"
     description = "Dummy mirror for goBuild"
-    doLast {
-        println("Hello, World!")
-    }
 }
 
 tasks.register<com.pivotstir.gogradle.tasks.GoClean>("clean") {

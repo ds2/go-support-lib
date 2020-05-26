@@ -12,13 +12,12 @@ require (
 	github.com/gofrs/flock v0.7.1 // indirect
 	github.com/golang/protobuf v1.4.2
 	github.com/opencontainers/go-digest v1.0.0 // indirect
-	github.com/shirou/gopsutil v2.18.12+incompatible
-	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
+	github.com/shirou/gopsutil v2.20.4+incompatible
 	github.com/sirupsen/logrus v1.6.0
 	github.com/stretchr/testify v1.5.1
 	gopkg.in/inf.v0 v0.9.1 // indirect
-	gopkg.in/yaml.v2 v2.2.8 // indirect
-	k8s.io/klog v0.3.3 // indirect
+	gopkg.in/yaml.v2 v2.3.0 // indirect
+	k8s.io/klog v1.0.0 // indirect
 	sigs.k8s.io/aws-iam-authenticator v0.5.0
 )
 

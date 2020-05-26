@@ -39,3 +39,7 @@ pkg
 *.tftstate
 terraform.tfplan
 vendor
+
+# Ignore Gradle project-specific cache directory
+.gradle
+.gogradle

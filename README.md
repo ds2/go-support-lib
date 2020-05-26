@@ -40,3 +40,4 @@ Tests via
     go mod tidy
     go mod verify
     go test ./... # or to fully test all packages -> go test all
+    ./gradlew clean release

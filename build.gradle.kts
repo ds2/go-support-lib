@@ -43,6 +43,7 @@ tasks.register<com.pivotstir.gogradle.tasks.GoClean>("clean") {
 }
 
 release {
+    tagTemplate = "v\${version}"
     with(propertyMissing("git") as net.researchgate.release.GitAdapter.GitConfig) {
         requireBranch = "release/2020"
     }

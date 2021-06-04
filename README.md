@@ -6,6 +6,12 @@
 
 Some helpful functions.
 
+## Using it in your project
+
+Run:
+
+    go get gitlab.com/ds_2/go-support-lib
+
 ## Protocol Buffers
 
 Install Protobuffers version via:

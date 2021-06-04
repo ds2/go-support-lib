@@ -34,7 +34,6 @@ Thumbs.db
 *.dll
 # go
 pkg
-*.swp
 # Terraform
 *.tftstate
 terraform.tfplan

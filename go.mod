@@ -1,5 +1,7 @@
 module gitlab.com/ds_2/go-support-lib
 
+go 1.16
+
 require (
 	github.com/Microsoft/go-winio v0.4.14 // indirect
 	github.com/StackExchange/wmi v0.0.0-20190523213315-cbe66965904d // indirect
@@ -20,5 +22,3 @@ require (
 	k8s.io/klog v1.0.0 // indirect
 	sigs.k8s.io/aws-iam-authenticator v0.5.0
 )
-
-go 1.14

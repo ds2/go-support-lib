@@ -20,15 +20,18 @@ import (
 )
 
 //GetNodeDetails returns all currently known information about this node.
-func GetNodeDetails() (data HealthInfo) {
+func GetNodeDetails() (data HealthInfo, err error) {
 	GetCPULoad(&data)
 	if mem, err := mem.VirtualMemory(); err == nil {
 		data.TotalMemory = mem.Total
 		data.AvailableMemory = mem.Available
+	} else {
+		return data, err
 	}
-	return data
+	return data, nil
 }
 
+//GetLocalNetworkInterfaces returns all known local network interfaces
 func GetLocalNetworkInterfaces() ([]NetworkInterfaceData, error) {
 	ifaces, err := net.Interfaces()
 	if err != nil {
@@ -55,15 +58,15 @@ func GetLocalNetworkInterfaces() ([]NetworkInterfaceData, error) {
 }
 
 // GetDiskSizeInfo returns the disk info for a given linux path
-func GetDiskSizeInfo(thisPath string) (disk PartitionInfo) {
+func GetDiskSizeInfo(thisPath string) (disk PartitionInfo, err error) {
 	fs := syscall.Statfs_t{}
-	err := syscall.Statfs(thisPath, &fs)
+	err = syscall.Statfs(thisPath, &fs)
 	if err != nil {
-		return
+		return disk, err
 	}
 	disk.Size = fs.Blocks * uint64(fs.Bsize)
 	disk.Free = fs.Bfree * uint64(fs.Bsize)
-	return disk
+	return disk, nil
 }
 
 /*
@@ -209,7 +212,11 @@ func GetHostInfo() (hostInfo HostInfo) {
 		thisInfo.MountPath = thisFs.Mountpoint
 		thisInfo.FsType = thisFs.Fstype
 		thisInfo.Device = thisFs.Device
-		var tempSizeData = GetDiskSizeInfo(thisFs.Mountpoint)
+		tempSizeData, err := GetDiskSizeInfo(thisFs.Mountpoint)
+		if err != nil {
+			log.Println("Error when checking mountpoint ", thisFs.Mountpoint, ": ", err)
+			continue
+		}
 		thisInfo.Size = tempSizeData.Size
 		thisInfo.Free = tempSizeData.Free
 		fsArray = append(fsArray, &thisInfo)

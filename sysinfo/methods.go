@@ -21,9 +21,9 @@ import (
 //GetNodeDetails returns all currently known information about this node.
 func GetNodeDetails() (data HealthInfo, err error) {
 	GetCPULoad(&data)
-	if mem, err := mem.VirtualMemory(); err == nil {
-		data.TotalMemory = mem.Total
-		data.AvailableMemory = mem.Available
+	if virtualMemory, err := mem.VirtualMemory(); err == nil {
+		data.TotalMemory = virtualMemory.Total
+		data.AvailableMemory = virtualMemory.Available
 	} else {
 		return data, err
 	}
@@ -84,8 +84,6 @@ func GetCPULoad(s *HealthInfo) {
 	s.CpuLoad15 = cpuStat.Load15
 }
 
-func main() {}
-
 /*
 GetHardwareData writes some statistics about this hardware into the given http response writer.
 */
@@ -93,7 +91,7 @@ func GetHardwareData(w http.ResponseWriter) {
 	runtimeOS := runtime.GOOS
 	// memory
 	vmStat, err := mem.VirtualMemory()
-	dealwithErr(err)
+	dealWithErr(err)
 
 	// disk - start from "/" mount point for Linux
 	// might have to change for Windows!!
@@ -101,21 +99,21 @@ func GetHardwareData(w http.ResponseWriter) {
 	// then use "\" instead of "/"
 
 	diskStat, err := disk.Usage("/")
-	dealwithErr(err)
+	dealWithErr(err)
 
 	// cpu - get CPU number of cores and speed
 	cpuStat, err := cpu.Info()
-	dealwithErr(err)
+	dealWithErr(err)
 	percentage, err := cpu.Percent(0, true)
-	dealwithErr(err)
+	dealWithErr(err)
 
 	// host or machine kernel, uptime, platform Info
 	hostStat, err := host.Info()
-	dealwithErr(err)
+	dealWithErr(err)
 
 	// get interfaces MAC/hardware address
 	interfStat, err := net.Interfaces()
-	dealwithErr(err)
+	dealWithErr(err)
 
 	html := "<html>OS : " + runtimeOS + "<br>"
 	html = html + "Total memory: " + strconv.FormatUint(vmStat.Total, 10) + " bytes <br>"
@@ -182,11 +180,11 @@ func GetHardwareData(w http.ResponseWriter) {
 
 	html = html + "</html>"
 
-	w.Write([]byte(html))
+	_, _ = w.Write([]byte(html))
 
 }
 
-func dealwithErr(err error) {
+func dealWithErr(err error) {
 	if err != nil {
 		fmt.Println(err)
 		//os.Exit(-1)
@@ -196,14 +194,14 @@ func dealwithErr(err error) {
 func GetHostInfo() (hostInfo HostInfo) {
 	//check hostname
 	hostStat, err := host.Info()
-	dealwithErr(err)
+	dealWithErr(err)
 	hostInfo.HostName = hostStat.Hostname
 	hostInfo.OsName = hostStat.OS
 	hostInfo.OsVersion = hostStat.PlatformVersion
 	foundFSs, err := disk.Partitions(true)
 	hostInfo.NumCores = uint32(runtime.NumCPU())
 	log.Println("version=", runtime.Version())
-	dealwithErr(err)
+	dealWithErr(err)
 	var fsArray []*PartitionInfo
 	for _, thisFs := range foundFSs {
 		var thisInfo PartitionInfo

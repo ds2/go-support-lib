@@ -5,7 +5,7 @@ plugins {
 
 extensions.getByType(com.pivotstir.gogradle.GoPluginExtension::class).apply {
     env {
-        version = "1.14"
+        version = "1.16"
         useSandbox = false
     }
 

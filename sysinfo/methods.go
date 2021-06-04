@@ -1,5 +1,5 @@
 // +build linux darwin
-// +build go1.6
+// +build go1.16
 
 package sysinfo
 

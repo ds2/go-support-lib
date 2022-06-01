@@ -5,7 +5,7 @@ plugins {
 
 extensions.getByType(com.pivotstir.gogradle.GoPluginExtension::class).apply {
     env {
-        version = "1.14"
+        version = "1.16"
         useSandbox = false
     }
 
@@ -38,6 +38,6 @@ tasks.register<com.pivotstir.gogradle.tasks.GoClean>("clean") {
 release {
     tagTemplate = "v\${version}"
     with(propertyMissing("git") as net.researchgate.release.GitAdapter.GitConfig) {
-        requireBranch = "releases/2020"
+        requireBranch = "releases/2021"
     }
 }

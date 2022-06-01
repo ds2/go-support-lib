@@ -46,4 +46,3 @@ Tests via
     go mod tidy -v # cleans all unneeded deps
     go mod verify
     go test ./... # or to fully test all packages -> go test all
-    ./gradlew clean release

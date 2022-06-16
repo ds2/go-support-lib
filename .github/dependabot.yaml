@@ -9,7 +9,20 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
+      time: "08:00"
+      timezone: "Europe/Berlin"
+    labels:
+      - "golang"
+      - "dependencies"
+    open-pull-requests-limit: 10
   - package-ecosystem: "github-actions" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "sunday"
+      time: "18:00"
+      timezone: "Europe/Berlin"
+    labels:
+      - "githubactions"
+      - "updates"
+    open-pull-requests-limit: 5

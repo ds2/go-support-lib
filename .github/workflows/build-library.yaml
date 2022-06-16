@@ -13,21 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GOPROXY: "https://goproxy.io,https://goproxy.dev,direct"
+      CI: "1"
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Set up Go
         uses: actions/setup-go@v3
         with:
-          go-version: 1.18
+          go-version: '>=1.18'
       - name: List files in the repository
         run: |
+          go version
+          env
           ls ${{ github.workspace }}
       - name: get dependencies
         run: go get ./...
       - name: generate files
         run: |
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest || exit 1
           export PATH=$PATH:$GOPATH/bin
           protoc --go_out=. common/*.proto
           protoc --go_out=. docker/*.proto
@@ -35,3 +38,5 @@ jobs:
           protoc --go_out=. sysinfo/*.proto
       - name: build all
         run: go build -race ./...
+      - name: test all
+        run: go test -v ./... -coverprofile .golang-coverage-report.txt -race $(go list ./... | grep -v /vendor/)

@@ -1,0 +1,25 @@
+name: build library
+
+on:
+  pull_request:
+  push:
+    branches:
+    - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      GOPROXY: "https://goproxy.io,https://goproxy.dev,direct"
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - name: generate files
+        run: ./ci.sh
+      - name: get dependencies
+        run: go get ./...
+      - name: build all
+        run: go build -race ./...

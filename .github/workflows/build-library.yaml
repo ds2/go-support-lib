@@ -25,5 +25,13 @@ jobs:
           ls ${{ github.workspace }}
       - name: get dependencies
         run: go get ./...
+      - name: generate files
+        run: |
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
+          export PATH=$PATH:$GOPATH/bin
+          protoc --go_out=. common/*.proto
+          protoc --go_out=. docker/*.proto
+          protoc --go_out=. k8s/*.proto
+          protoc --go_out=. sysinfo/*.proto
       - name: build all
         run: go build -race ./...

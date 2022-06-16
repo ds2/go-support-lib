@@ -6,11 +6,17 @@
 
 Some helpful functions.
 
+## Using it in your project
+
+Run:
+
+    go get gitlab.com/ds_2/go-support-lib
+
 ## Protocol Buffers
 
 Install Protobuffers version via:
 
-    go get -buildmode=default github.com/golang/protobuf
+    go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 
 To generate the stubs, run inside the respective directory:
 
@@ -21,9 +27,18 @@ To generate the stubs, run inside the respective directory:
 
 ## Build as library
 
+Run:
+
+    go build -race ./...
+
+To deploy it locally:
+
+    go install ./...
+
 ### Update dependencies
 
     export GO111MODULE=on
+    go mod tidy
     go clean -modcache
     go list -u -m all
 
@@ -37,6 +52,6 @@ Tests via
 
 ## Releasing
 
-    go mod tidy
+    go mod tidy -v # cleans all unneeded deps
     go mod verify
     go test ./... # or to fully test all packages -> go test all

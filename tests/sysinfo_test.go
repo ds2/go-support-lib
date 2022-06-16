@@ -26,7 +26,7 @@ func TestGetCPULoad(t *testing.T) {
 }
 
 func TestGetNodeDetails(t *testing.T) {
-	var nodeDetails = sysinfo.GetNodeDetails()
+	var nodeDetails, _ = sysinfo.GetNodeDetails()
 	if nodeDetails.TotalMemory <= 0 {
 		t.Error("No total mem found!")
 	}
@@ -43,11 +43,11 @@ func TestGetHostInfo(t *testing.T) {
 	log.Println("MyInfo: ", myHostInfo)
 }
 
-func TestGetInterfaces(t *testing.T){
-	var myIFs, _ =sysinfo.GetLocalNetworkInterfaces()
-	assert.True(t, len(myIFs)>0)
+func TestGetInterfaces(t *testing.T) {
+	var myIFs, _ = sysinfo.GetLocalNetworkInterfaces()
+	assert.True(t, len(myIFs) > 0)
 	log.Println("Networks: ")
 	for idx, myIF := range myIFs {
-		log.Println("Network ",idx,": ",myIF)
+		log.Println("Network ", idx, ": ", myIF)
 	}
 }

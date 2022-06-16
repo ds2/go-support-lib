@@ -4,7 +4,7 @@ import "strings"
 
 func StringSliceContains(slice []string, item string) bool {
 	for _, sliceItem := range slice {
-		if (strings.EqualFold(sliceItem, item)) {
+		if strings.EqualFold(sliceItem, item) {
 			return true
 		}
 	}

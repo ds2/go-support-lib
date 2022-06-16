@@ -14,6 +14,7 @@ jobs:
     env:
       GOPROXY: "https://goproxy.io,https://goproxy.dev,direct"
       CI: "1"
+      GOPATH: "~/go"
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3

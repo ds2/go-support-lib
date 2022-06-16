@@ -2,9 +2,11 @@ name: build library
 
 on:
   pull_request:
+    branches:
+      - develop
   push:
     branches:
-    - develop
+      - develop
 
 jobs:
   build:
@@ -14,11 +16,13 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - name: generate files
-        run: ./ci.sh
       - name: get dependencies
         run: go get ./...
       - name: build all

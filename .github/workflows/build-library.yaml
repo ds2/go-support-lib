@@ -14,7 +14,6 @@ jobs:
     env:
       GOPROXY: "https://goproxy.io,https://goproxy.dev,direct"
       CI: "1"
-      GOPATH: "~/go"
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
@@ -25,7 +24,6 @@ jobs:
       - name: List files in the repository
         run: |
           go version
-          env
           ls ${{ github.workspace }}
       - name: get dependencies
         run: go get ./...
@@ -33,6 +31,9 @@ jobs:
         run: |
           go install google.golang.org/protobuf/cmd/protoc-gen-go@latest || exit 1
           export PATH=$PATH:$GOPATH/bin
+          env
+          ls -alFh $GOPATH/bin
+          which protoc
           protoc --go_out=. common/*.proto
           protoc --go_out=. docker/*.proto
           protoc --go_out=. k8s/*.proto

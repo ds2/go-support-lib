@@ -1,13 +1,14 @@
 syntax = "proto3";
 
 package common;
+option go_package = "/common";
 
 enum State {
-    Unknown = 0;
-    New = 1;
-    Inactive = 2;
-    Prepared = 3;
-    Active = 4;
-    Removed = 5;
-    Error = 6;
+  Unknown = 0;
+  New = 1;
+  Inactive = 2;
+  Prepared = 3;
+  Active = 4;
+  Removed = 5;
+  Error = 6;
 }

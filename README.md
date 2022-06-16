@@ -16,7 +16,7 @@ Run:
 
 Install Protobuffers version via:
 
-    go get -buildmode=default github.com/golang/protobuf
+    go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
 
 To generate the stubs, run inside the respective directory:
 
@@ -27,9 +27,18 @@ To generate the stubs, run inside the respective directory:
 
 ## Build as library
 
+Run:
+
+    go build -race ./...
+
+To deploy it locally:
+
+    go install ./...
+
 ### Update dependencies
 
     export GO111MODULE=on
+    go mod tidy
     go clean -modcache
     go list -u -m all
 

@@ -2,6 +2,7 @@ package tests
 
 import (
 	"fmt"
+	"os"
 	"testing"
 	"time"
 
@@ -21,6 +22,9 @@ func init() {
 }
 
 func TestGetCurrentContainers(t *testing.T) {
+	if os.Getenv("CI") != "" {
+		t.Skip("Skipped due to CI environment")
+	}
 	docker.GetCurrentContainers()
 	//assert.NotNil(t, containers, "the given containers array is nil!!")
 }

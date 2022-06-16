@@ -4,9 +4,12 @@ image: golang:latest
 variables:
   # Please edit to your GitLab project
   REPO_NAME: gitlab.com/ds_2/go-support-lib
+  GOLANG_BEFORE_SCRIPT: "chmod a+x ci.sh; ./ci.sh"
+  CI: "1"
+
 include:
   - project: 'ds_2/ci-templates'
-    ref: v0.1.4 # you can also use the branch name, or a SHA256 value
-    file: # you can add multiple files you need for your project
+    ref: develop
+    file:
       - '/templates/stages.yaml'
       - '/templates/build-golang.yaml'

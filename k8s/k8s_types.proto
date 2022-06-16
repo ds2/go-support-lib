@@ -3,6 +3,7 @@ syntax = "proto3";
 import "google/protobuf/any.proto";
 
 package k8s;
+option go_package = "/k8s";
 
 message NodeList {
     string kind = 1;

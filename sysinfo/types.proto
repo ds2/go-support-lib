@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package sysinfo;
+option go_package = "/sysinfo";
 
 message PartitionInfo {
     string MountPath = 1;

@@ -42,3 +42,7 @@ vendor
 # Ignore Gradle project-specific cache directory
 .gradle
 .gogradle
+common/common.pb.go
+docker/dkr.pb.go
+k8s/k8s_types.pb.go
+sysinfo/types.pb.go

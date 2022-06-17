@@ -19,15 +19,16 @@ import (
 )
 
 //GetNodeDetails returns all currently known information about this node.
-func GetNodeDetails() (data *HealthInfo, err error) {
-	GetCPULoad(data)
+func GetNodeDetails() (*HealthInfo, error) {
+	var data HealthInfo
+	GetCPULoad(&data)
 	if virtualMemory, err := mem.VirtualMemory(); err == nil {
 		data.TotalMemory = virtualMemory.Total
 		data.AvailableMemory = virtualMemory.Available
 	} else {
-		return data, err
+		return &data, err
 	}
-	return data, nil
+	return &data, nil
 }
 
 //GetLocalNetworkInterfaces returns all known local network interfaces
@@ -57,15 +58,16 @@ func GetLocalNetworkInterfaces() ([]*NetworkInterfaceData, error) {
 }
 
 // GetDiskSizeInfo returns the disk info for a given linux path
-func GetDiskSizeInfo(thisPath string) (disk *PartitionInfo, err error) {
+func GetDiskSizeInfo(thisPath string) (*PartitionInfo, error) {
+	var diskInfo PartitionInfo
 	fs := syscall.Statfs_t{}
-	err = syscall.Statfs(thisPath, &fs)
+	err := syscall.Statfs(thisPath, &fs)
 	if err != nil {
-		return disk, err
+		return &diskInfo, err
 	}
-	disk.Size = fs.Blocks * uint64(fs.Bsize)
-	disk.Free = fs.Bfree * uint64(fs.Bsize)
-	return disk, nil
+	diskInfo.Size = fs.Blocks * uint64(fs.Bsize)
+	diskInfo.Free = fs.Bfree * uint64(fs.Bsize)
+	return &diskInfo, nil
 }
 
 /*
@@ -191,7 +193,8 @@ func dealWithErr(err error) {
 	}
 }
 
-func GetHostInfo() (hostInfo *HostInfo) {
+func GetHostInfo() *HostInfo {
+	var hostInfo HostInfo
 	//check hostname
 	hostStat, err := host.Info()
 	dealWithErr(err)
@@ -219,7 +222,7 @@ func GetHostInfo() (hostInfo *HostInfo) {
 		fsArray = append(fsArray, &thisInfo)
 	}
 	hostInfo.FileSystems = fsArray
-	return hostInfo
+	return &hostInfo
 }
 
 //func GetProcessesInfo(pid int) []ProcessDetails{

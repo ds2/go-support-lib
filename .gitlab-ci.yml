@@ -6,7 +6,7 @@ variables:
 
 include:
   - project: 'ds_2/ci-templates'
-    ref: develop
+    ref: v0.1.5
     file:
       - '/templates/stages.yaml'
       - '/templates/build-golang.yaml'

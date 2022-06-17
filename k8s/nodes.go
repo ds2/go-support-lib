@@ -49,7 +49,7 @@ func GetNodesInternalIpAddresses(clusterEndpoint string, limit uint, authToken s
 	defer body.Body.Close()
 	logrus.Debug("Return status: ", body.StatusCode)
 	logrus.Debug("Return length: ", body.ContentLength)
-	var nodeListData NodeList
+	var nodeListData *NodeList
 	var bodyBytes, _ = ioutil.ReadAll(body.Body)
 	ioutil.WriteFile(".awsResponse.json", bodyBytes, 0644)
 	bodyString := string(bodyBytes)
@@ -58,7 +58,7 @@ func GetNodesInternalIpAddresses(clusterEndpoint string, limit uint, authToken s
 		return nil
 	}
 	logrus.Debug("Response: ", bodyString)
-	err = json.Unmarshal(bodyBytes, &nodeListData)
+	err = json.Unmarshal(bodyBytes, nodeListData)
 	if err != nil {
 		logrus.Error("Could not parse response body into NodeList type! ", err)
 		return nil

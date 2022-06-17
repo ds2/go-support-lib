@@ -30,8 +30,8 @@ func GetTokenViaAwsIamAuthenticatorClient(k8sClusterId string) (accesstoken stri
 		log.Fatal("Error occurred: ", err, ": ", out)
 	}
 	//response is a json string
-	var answer AwsIamAuthenticatorResponse
-	err = json.Unmarshal(out, &answer)
+	var answer *AwsIamAuthenticatorResponse
+	err = json.Unmarshal(out, answer)
 	if err != nil {
 		log.Fatalln("Error when trying to unmarshal the received data from the aws iam authenticator: ", err)
 	}

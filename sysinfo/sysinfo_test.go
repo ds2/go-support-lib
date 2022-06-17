@@ -1,19 +1,18 @@
-package tests
+package sysinfo
 
 import (
 	"log"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"gitlab.com/ds_2/go-support-lib/sysinfo"
 )
 
 func TestGetCPULoad(t *testing.T) {
 	if testing.Short() {
 		t.Skip("Skipping CPULoad Test")
 	}
-	var localData sysinfo.HealthInfo
-	sysinfo.GetCPULoad(&localData)
+	var localData HealthInfo
+	GetCPULoad(&localData)
 	if localData.CpuLoad1 <= 0 {
 		t.Error("No CPU Load 1")
 	}
@@ -25,8 +24,8 @@ func TestGetCPULoad(t *testing.T) {
 	}
 }
 
-func TestGetNodeDetails(t *testing.T) {
-	var nodeDetails, _ = sysinfo.GetNodeDetails()
+func TestGetNodeDetails2(t *testing.T) {
+	var nodeDetails, _ = GetNodeDetails()
 	if nodeDetails.TotalMemory <= 0 {
 		t.Error("No total mem found!")
 	}
@@ -37,14 +36,14 @@ func TestGetNodeDetails(t *testing.T) {
 }
 
 func TestGetHostInfo(t *testing.T) {
-	myHostInfo := sysinfo.GetHostInfo()
+	myHostInfo := GetHostInfo()
 	assert.NotNil(t, myHostInfo, "No host data found!")
 	assert.NotNil(t, myHostInfo.FileSystems)
 	log.Println("MyInfo: ", myHostInfo)
 }
 
 func TestGetInterfaces(t *testing.T) {
-	var myIFs, _ = sysinfo.GetLocalNetworkInterfaces()
+	var myIFs, _ = GetLocalNetworkInterfaces()
 	assert.True(t, len(myIFs) > 0)
 	log.Println("Networks: ")
 	for idx, myIF := range myIFs {

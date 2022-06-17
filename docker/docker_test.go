@@ -1,4 +1,4 @@
-package tests
+package docker
 
 import (
 	"fmt"
@@ -8,7 +8,6 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
-	"gitlab.com/ds_2/go-support-lib/docker"
 )
 
 func init() {
@@ -25,7 +24,7 @@ func TestGetCurrentContainers(t *testing.T) {
 	if os.Getenv("CI") != "" {
 		t.Skip("Skipped due to CI environment")
 	}
-	docker.GetCurrentContainers()
+	GetCurrentContainers()
 	//assert.NotNil(t, containers, "the given containers array is nil!!")
 }
 
@@ -36,7 +35,7 @@ func TestDurationSince(t *testing.T) {
 	var hours = int64(1)
 	var durationSeconds = seconds + minutes*60 + hours*60*60
 	var nowInPast = now.Unix() - durationSeconds
-	var lostMinutes = docker.GetExecutingSeconds(nowInPast, now)
+	var lostMinutes = GetExecutingSeconds(nowInPast, now)
 	assert.True(t, lostMinutes > 0, "No lost seconds??")
 	assert.Equal(t, uint64(durationSeconds), lostMinutes, "The time is not as it should be!")
 }

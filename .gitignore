@@ -42,4 +42,3 @@ vendor
 # Ignore Gradle project-specific cache directory
 .gradle
 .gogradle
-*.pb.go

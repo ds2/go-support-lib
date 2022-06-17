@@ -12,7 +12,7 @@ import (
 	"gitlab.com/ds_2/go-support-lib/sysinfo"
 )
 
-func SendAsJson(url string, t sysinfo.HealthInfo) {
+func SendAsJson(url string, t *sysinfo.HealthInfo) {
 	log.Println("Dto values: ", t)
 	var jsonBytes, err = json.Marshal(t)
 	if err != nil {

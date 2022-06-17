@@ -9,11 +9,11 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func GetCurrentContainers() []ContainerInfo {
-	var rc []ContainerInfo
+func GetCurrentContainers() []*ContainerInfo {
+	var rc []*ContainerInfo
 	{
 	}
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		logrus.Panic("Error when setting up the new client: ", err)
 	}
@@ -34,8 +34,8 @@ func GetCurrentContainers() []ContainerInfo {
 			State:           container.State,
 			Status:          container.Status,
 		}
-		logrus.Infoln("Info about this container is:", thisInfo)
-		rc = append(rc, thisInfo)
+		logrus.Infoln("Info about this container is:", &thisInfo)
+		rc = append(rc, &thisInfo)
 	}
 	return rc
 }
@@ -55,7 +55,7 @@ func GetExecutingSeconds(startSecondsUnix int64, nowTime time.Time) uint64 {
 }
 
 func StopContainer(containerId string, maxWaitTime *time.Duration) bool {
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}
@@ -69,7 +69,7 @@ func StopContainer(containerId string, maxWaitTime *time.Duration) bool {
 }
 
 func TerminateContainer(containerId string) bool {
-	cli, err := client.NewEnvClient()
+	cli, err := client.NewClientWithOpts(client.FromEnv)
 	if err != nil {
 		panic(err)
 	}

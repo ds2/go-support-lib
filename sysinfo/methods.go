@@ -19,8 +19,8 @@ import (
 )
 
 //GetNodeDetails returns all currently known information about this node.
-func GetNodeDetails() (data HealthInfo, err error) {
-	GetCPULoad(&data)
+func GetNodeDetails() (data *HealthInfo, err error) {
+	GetCPULoad(data)
 	if virtualMemory, err := mem.VirtualMemory(); err == nil {
 		data.TotalMemory = virtualMemory.Total
 		data.AvailableMemory = virtualMemory.Available
@@ -31,12 +31,12 @@ func GetNodeDetails() (data HealthInfo, err error) {
 }
 
 //GetLocalNetworkInterfaces returns all known local network interfaces
-func GetLocalNetworkInterfaces() ([]NetworkInterfaceData, error) {
+func GetLocalNetworkInterfaces() ([]*NetworkInterfaceData, error) {
 	ifaces, err := net.Interfaces()
 	if err != nil {
 		return nil, err
 	}
-	var nwData []NetworkInterfaceData
+	var nwData []*NetworkInterfaceData
 	for _, value := range ifaces {
 		//println("Network ", value)
 		var thisNwData = NetworkInterfaceData{}
@@ -45,7 +45,7 @@ func GetLocalNetworkInterfaces() ([]NetworkInterfaceData, error) {
 		thisNwData.Name = value.Name
 		thisNwData.HwAddr = value.HardwareAddr
 		thisNwData.Type = NetworkInterfaceType_ETHERNET
-		nwData = append(nwData, thisNwData)
+		nwData = append(nwData, &thisNwData)
 		for _, ifAddr := range value.Addrs {
 			addr := IpAddress{}
 			addr.Address = ifAddr.Addr
@@ -57,7 +57,7 @@ func GetLocalNetworkInterfaces() ([]NetworkInterfaceData, error) {
 }
 
 // GetDiskSizeInfo returns the disk info for a given linux path
-func GetDiskSizeInfo(thisPath string) (disk PartitionInfo, err error) {
+func GetDiskSizeInfo(thisPath string) (disk *PartitionInfo, err error) {
 	fs := syscall.Statfs_t{}
 	err = syscall.Statfs(thisPath, &fs)
 	if err != nil {
@@ -191,7 +191,7 @@ func dealWithErr(err error) {
 	}
 }
 
-func GetHostInfo() (hostInfo HostInfo) {
+func GetHostInfo() (hostInfo *HostInfo) {
 	//check hostname
 	hostStat, err := host.Info()
 	dealWithErr(err)

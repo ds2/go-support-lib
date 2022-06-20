@@ -25,25 +25,10 @@ jobs:
         run: |
           go version
           ls ${{ github.workspace }}
-      - uses: arduino/setup-protoc@v1
-        with:
-          version: '3.x'
       - name: get dependencies
         run: go get ./...
-      - name: generate files
-        run: |
-          echo "GOPATH=$GOPATH"
-          echo "GOROOT=$GOROOT"
-          go install google.golang.org/protobuf/cmd/protoc-gen-go@latest
-          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
-          export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
-          env
-          ls -alFh $GOPATH/bin
-          which protoc
-          protoc --go_out=. common/*.proto
-          protoc --go_out=. docker/*.proto
-          protoc --go_out=. k8s/*.proto
-          protoc --go_out=. sysinfo/*.proto
+      - name: check vet status
+        run: go vet $(go list ./... | grep -v /vendor/)
       - name: build all
         run: go build -race ./...
       - name: test all

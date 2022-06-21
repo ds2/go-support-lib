@@ -3,7 +3,7 @@ module gitlab.com/ds_2/go-support-lib
 go 1.18
 
 require (
-	github.com/aws/aws-sdk-go v1.44.37
+	github.com/aws/aws-sdk-go v1.44.38
 	github.com/docker/docker v20.10.17+incompatible
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/sirupsen/logrus v1.8.1
@@ -26,7 +26,7 @@ require (
 	github.com/prometheus/common v0.34.0 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/tklauser/numcpus v0.5.0 // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/protobuf v1.28.0
 )
 
 require (

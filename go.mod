@@ -7,7 +7,7 @@ require (
 	github.com/docker/docker v20.10.17+incompatible
 	github.com/shirou/gopsutil v3.21.11+incompatible
 	github.com/sirupsen/logrus v1.8.1
-	github.com/stretchr/testify v1.7.2
+	github.com/stretchr/testify v1.7.4
 	sigs.k8s.io/aws-iam-authenticator v0.5.8
 )
 
@@ -26,7 +26,7 @@ require (
 	github.com/prometheus/common v0.34.0 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/tklauser/numcpus v0.5.0 // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/protobuf v1.28.0
 )
 
 require (

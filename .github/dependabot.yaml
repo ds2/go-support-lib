@@ -8,9 +8,10 @@ updates:
   - package-ecosystem: "gomod" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
-      interval: "daily"
+      interval: "weekly"
       time: "08:00"
       timezone: "Europe/Berlin"
+      day: "wednesday"
     labels:
       - "go"
       - "dependencies"

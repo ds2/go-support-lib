@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go v1.44.58
 	github.com/docker/docker v20.10.17+incompatible
 	github.com/shirou/gopsutil/v3 v3.22.6
-	github.com/sirupsen/logrus v1.8.1
+	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.0
 	sigs.k8s.io/aws-iam-authenticator v0.5.9
 )
@@ -49,7 +49,7 @@ require (
 	github.com/tklauser/go-sysconf v0.3.10 // indirect
 	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	golang.org/x/net v0.0.0-20220615171555-694bf12d69de // indirect
-	golang.org/x/sys v0.0.0-20220615213510-4f61da869c0c // indirect
+	golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect

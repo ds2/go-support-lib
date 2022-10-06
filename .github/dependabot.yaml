@@ -1,29 +1,33 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
-
 version: 2
+
 updates:
-  - package-ecosystem: "gomod" # See documentation for possible values
-    directory: "/" # Location of package manifests
+  - package-ecosystem: "gomod"  # can also be maven, gradle, gomod
+    directory: "/"
     schedule:
-      interval: "weekly"
-      time: "08:00"
+      interval: "daily"
+      time: "09:00"
       timezone: "Europe/Berlin"
-      day: "wednesday"
+    open-pull-requests-limit: 20
+    reviewers: # you can also use assignees
+      - "lexxy23"
+    commit-message:
+      prefix: "⬆️"
+    # here you define the labels, if required. You may also omit them to rely on dependabots default values!
     labels:
-      - "go"
+      - "go"  # you may also use java, rust, go
       - "dependencies"
-    open-pull-requests-limit: 10
   - package-ecosystem: "github-actions" # See documentation for possible values
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
-      day: "sunday"
-      time: "18:00"
+      day: "sunday" # only when weekly is set!
+      time: "09:00"
       timezone: "Europe/Berlin"
+    reviewers: # you can also use assignees
+      - "lexxy23"
     labels:
       - "githubactions"
       - "updates"
     open-pull-requests-limit: 5
+    commit-message:
+      prefix: "🔨"

@@ -2,6 +2,7 @@ header:
   license:
     spdx-id: Apache-2.0
     copyright-owner: Dirk Strauss
+    software-name: ds2-golang-support-lib
 
   paths-ignore:
     - 'dist'
@@ -21,3 +22,16 @@ header:
 dependency:
   files:
     - go.mod
+  licenses:
+    - name: github.com/chzyer/logex
+      version: v1.1.10
+      license: MIT
+    - name: github.com/kr/logfmt
+      version: v0.0.0-20140226030751-b84e30acd515
+      license: MIT
+    - name: github.com/munnerz/goautoneg # TODO find out what this dep is being used for
+      version: v0.0.0-20120707110453-a547fc61f48d
+      license: MIT
+    - name: github.com/pascaldekloe/goe
+      version: v0.0.0-20180627143212-57f6aae5913c
+      license: CC0-1.0

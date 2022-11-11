@@ -10,9 +10,11 @@ header:
     - '**/*.proto'
     - '**/*.pb.go'
     - 'go.mod'
+    - 'go.sum'
     - 'LICENSE'
     - 'NOTICE'
     - '.github'
+    - '.*'
 
   comment: on-failure
 

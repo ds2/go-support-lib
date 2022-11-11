@@ -52,6 +52,15 @@ Tests via
 
 ## Releasing
 
+### Update License headers
+
+Via:
+
+    podman run -it --rm -v $(pwd):/github/workspace docker.io/apache/skywalking-eyes header check
+    podman run -it --rm -v $(pwd):/github/workspace docker.io/apache/skywalking-eyes header fix
+
+### Check release branch
+
     go mod tidy -v # cleans all unneeded deps
     go mod verify
     go test ./... # or to fully test all packages -> go test all

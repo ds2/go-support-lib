@@ -7,8 +7,12 @@ header:
     - 'dist'
     - 'licenses'
     - '**/*.md'
+    - '**/*.proto'
+    - '**/*.pb.go'
+    - 'go.mod'
     - 'LICENSE'
     - 'NOTICE'
+    - '.github'
 
   comment: on-failure
 

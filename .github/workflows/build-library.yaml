@@ -21,6 +21,10 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: '>=1.18'
+      - name: Check License Header
+        uses: apache/skywalking-eyes/header@0.4.0
+      - name: Check Dependencies' License
+        uses: apache/skywalking-eyes/dependency@0.4.0
       - name: List files in the repository
         run: |
           go version

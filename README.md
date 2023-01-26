@@ -45,7 +45,7 @@ To deploy it locally:
 Use:
 
     go build -race ./...
-    
+
 Tests via
 
     go test ./...

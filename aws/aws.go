@@ -63,7 +63,7 @@ func HandleAwsError(error2 error, errorMsg string, fail bool) bool {
 	return false
 }
 
-//Returns the ARNs for the target groups of this load balancer.
+// Returns the ARNs for the target groups of this load balancer.
 func GetElbTargetGroupsArns(elbSvc *elbv2.ELBV2, elbName string) (tgArns []string) {
 	lbArn := GetLoadBalancerArn(elbSvc, elbName)
 	targetHealthResponse, err := elbSvc.DescribeTargetGroups(&elbv2.DescribeTargetGroupsInput{
@@ -82,7 +82,7 @@ func GetElbInstanceHealthViaSession(session *session.Session, elbName string, in
 	return GetElbInstanceHealth(elbv2.New(session), elbName, instanceIds)
 }
 
-//Returns the common health state of the targets of the given load balancer.
+// Returns the common health state of the targets of the given load balancer.
 func GetElbInstanceHealth(elbSvc *elbv2.ELBV2, elbName string, instanceIds []string) (state common.State) {
 	state = common.State_Unknown
 	tgArn := GetElbTargetGroupsArns(elbSvc, elbName)
@@ -113,13 +113,10 @@ func GetElbInstanceHealth(elbSvc *elbv2.ELBV2, elbName string, instanceIds []str
 					state = common.State_Active
 				case "unhealthy":
 					state = common.State_Error
-					break
 				case "initial":
 					state = common.State_New
-					break
 				case "unused":
 					state = common.State_Prepared
-					break
 				default:
 					logrus.Warn("Unmapped state: ", stateStr)
 				}

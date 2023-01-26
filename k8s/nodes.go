@@ -17,8 +17,9 @@ package k8s
 import (
 	"crypto/tls"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
+	"os"
 	"strconv"
 	"time"
 
@@ -64,8 +65,12 @@ func GetNodesInternalIpAddresses(clusterEndpoint string, limit uint, authToken s
 	logrus.Debug("Return status: ", body.StatusCode)
 	logrus.Debug("Return length: ", body.ContentLength)
 	var nodeListData *NodeList
-	var bodyBytes, _ = ioutil.ReadAll(body.Body)
-	ioutil.WriteFile(".awsResponse.json", bodyBytes, 0644)
+	var bodyBytes, _ = io.ReadAll(body.Body)
+	err3 := os.WriteFile(".awsResponse.json", bodyBytes, 0644)
+	if err3 != nil {
+		logrus.Error("Error when writing file to local disc:", err3)
+		return nil
+	}
 	bodyString := string(bodyBytes)
 	if body.StatusCode >= 400 {
 		logrus.Error("No result data found!")
@@ -86,8 +91,7 @@ func GetNodesInternalIpAddresses(clusterEndpoint string, limit uint, authToken s
 			if addrType < 0 {
 				continue
 			}
-			var typeResolved NodeAddressType
-			typeResolved = NodeAddressType(addrType)
+			var typeResolved = NodeAddressType(addrType)
 			if NodeAddressType_InternalIP == typeResolved {
 				result = append(result, addr.Address)
 			}

@@ -35,7 +35,7 @@ jobs:
         run: go test -v ./... -coverprofile .golang-coverage-report.txt -race $(go list ./... | grep -v /vendor/)
       # Download and invoke cyclonedx-gomod in a single step
       - name: Generate SBOM
-        uses: CycloneDX/gh-gomod-generate-sbom@v1
+        uses: CycloneDX/gh-gomod-generate-sbom@v1.1.0
         with:
           version: v1
           args: mod -licenses -json -output bom.json

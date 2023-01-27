@@ -16,6 +16,7 @@ header:
     - 'NOTICE'
     - '.github'
     - '.*'
+    - 'bom.json'
 
   comment: on-failure
 

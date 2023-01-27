@@ -32,7 +32,7 @@ import (
 	"github.com/shirou/gopsutil/v3/net"
 )
 
-//GetNodeDetails returns all currently known information about this node.
+// GetNodeDetails returns all currently known information about this node.
 func GetNodeDetails() (*HealthInfo, error) {
 	var data HealthInfo
 	GetCPULoad(&data)
@@ -45,7 +45,7 @@ func GetNodeDetails() (*HealthInfo, error) {
 	return &data, nil
 }
 
-//GetLocalNetworkInterfaces returns all known local network interfaces
+// GetLocalNetworkInterfaces returns all known local network interfaces
 func GetLocalNetworkInterfaces() ([]*NetworkInterfaceData, error) {
 	ifaces, err := net.Interfaces()
 	if err != nil {

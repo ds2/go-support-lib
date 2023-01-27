@@ -26,7 +26,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-// Returns the internal ip addresses of all known nodes of the cluster.
+// GetNodesInternalIpAddresses returns the internal ip addresses of all known nodes of the cluster.
 func GetNodesInternalIpAddresses(clusterEndpoint string, limit uint, authToken string, certClientFile string) (result []string) {
 	var nodeUrl = clusterEndpoint + "/api/v1/nodes?limit=" + strconv.Itoa(int(limit)) + "&pretty=true"
 	logrus.Debug("URL to use is: ", nodeUrl)

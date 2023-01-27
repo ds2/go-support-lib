@@ -1,0 +1,33 @@
+syntax = "proto3";
+option go_package = "/vsphere";
+package vsphere;
+
+enum PowerState {
+  UnknownPowerState = 0;
+  PoweredOn = 1;
+  PoweredOff = 2;
+  Suspended = 3;
+}
+
+enum OverallStatus {
+  UnknownOverallStatus = 0;
+  GRAY = 1;
+  GREEN = 2;
+  YELLOW = 3;
+  RED = 4;
+}
+
+message DsVirtualMachine {
+  string id = 1;
+  string name = 2;
+  repeated string ipV4Addresses = 3;
+  repeated string ipV6Addresses = 4;
+  uint32 cpuCount = 5;
+  uint64 memoryMB = 6;
+  PowerState powerState = 7;
+  string guestId = 8;
+  OverallStatus overall = 9;
+  string hostname = 10;
+  uint32 uptimeSeconds = 11;
+  string instanceUuid = 12;
+}

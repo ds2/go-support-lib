@@ -14,7 +14,10 @@
 
 package common
 
-import "strings"
+import (
+	"os"
+	"strings"
+)
 
 func StringSliceContains(slice []string, item string) bool {
 	for _, sliceItem := range slice {
@@ -50,4 +53,12 @@ func StringSpliceDifference(slice1 []string, slice2 []string) []string {
 		}
 	}
 	return diff
+}
+
+func GetEnvVar(envVarName, def string) string {
+	var result, exists = os.LookupEnv(envVarName)
+	if !exists {
+		result = def
+	}
+	return result
 }

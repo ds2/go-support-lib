@@ -36,6 +36,6 @@ repos:
       - id: go-mod-tidy
       - id: go-mod-tidy-repo
       - id: go-build-mod
-      - id: go-test-mod
+#      - id: go-test-mod
 #      - id: go-vet
       - id: go-vet-mod

@@ -24,6 +24,7 @@ To generate the stubs, run inside the respective directory:
     protoc --go_out=. docker/*.proto
     protoc --go_out=. k8s/*.proto
     protoc --go_out=. sysinfo/*.proto
+    protoc --go_out=. vsphere/*.proto
 
 ## Build as library
 

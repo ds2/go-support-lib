@@ -8,7 +8,7 @@ require (
 	github.com/shirou/gopsutil/v3 v3.22.12
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.1
-	github.com/vmware/govmomi v0.29.0
+	github.com/vmware/govmomi v0.30.2
 	sigs.k8s.io/aws-iam-authenticator v0.6.3
 )
 

@@ -16,6 +16,7 @@ package docker
 
 import (
 	"context"
+	"github.com/docker/docker/api/types/container"
 	"time"
 
 	"github.com/docker/docker/api/types"
@@ -74,7 +75,12 @@ func StopContainer(containerId string, maxWaitTime *time.Duration) bool {
 		panic(err)
 	}
 	ctx := context.Background()
-	errContainerStop := cli.ContainerStop(ctx, containerId, maxWaitTime)
+	var maxWaitSeconds int = int(maxWaitTime.Seconds())
+	stopOptions := container.StopOptions{
+		Signal:  "",
+		Timeout: &maxWaitSeconds,
+	}
+	errContainerStop := cli.ContainerStop(ctx, containerId, stopOptions)
 	if errContainerStop != nil {
 		logrus.Warn("Could not stop container ", containerId, " due to: ", errContainerStop)
 		return false

@@ -9,7 +9,7 @@ require (
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.2
 	github.com/vmware/govmomi v0.30.2
-	sigs.k8s.io/aws-iam-authenticator v0.6.3
+	sigs.k8s.io/aws-iam-authenticator v0.6.4
 )
 
 require (

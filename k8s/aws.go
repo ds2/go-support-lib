@@ -23,8 +23,8 @@ import (
 	"sigs.k8s.io/aws-iam-authenticator/pkg/token"
 )
 
-func GetAwsK8sAccessToken(k8sClusterId string, stsPartitionId string) (accessToken string) {
-	var verifierSvc = token.NewVerifier(k8sClusterId, stsPartitionId)
+func GetAwsK8sAccessToken(k8sClusterId string, stsPartitionId string, awsRegion string) (accessToken string) {
+	var verifierSvc = token.NewVerifier(k8sClusterId, stsPartitionId, awsRegion)
 	thisGen, _ := token.NewGenerator(true, true)
 	awsToken, _ := thisGen.Get(k8sClusterId)
 	accessToken = awsToken.Token

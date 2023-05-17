@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/aws/aws-sdk-go v1.44.263
-	github.com/docker/docker v23.0.6+incompatible
+	github.com/docker/docker v24.0.0+incompatible
 	github.com/shirou/gopsutil/v3 v3.23.4
 	github.com/sirupsen/logrus v1.9.0
 	github.com/stretchr/testify v1.8.2

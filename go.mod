@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go v1.44.264
 	github.com/docker/docker v24.0.0+incompatible
 	github.com/shirou/gopsutil/v3 v3.23.4
-	github.com/sirupsen/logrus v1.9.1
+	github.com/sirupsen/logrus v1.9.2
 	github.com/stretchr/testify v1.8.2
 	github.com/vmware/govmomi v0.30.4
 	sigs.k8s.io/aws-iam-authenticator v0.6.10

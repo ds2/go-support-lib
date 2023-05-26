@@ -3,7 +3,7 @@ module gitlab.com/ds_2/go-support-lib
 go 1.18
 
 require (
-	github.com/aws/aws-sdk-go v1.44.269
+	github.com/aws/aws-sdk-go v1.44.270
 	github.com/docker/docker v24.0.1+incompatible
 	github.com/shirou/gopsutil/v3 v3.23.4
 	github.com/sirupsen/logrus v1.9.2

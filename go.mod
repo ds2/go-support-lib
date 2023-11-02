@@ -3,7 +3,7 @@ module gitlab.com/ds_2/go-support-lib
 go 1.18
 
 require (
-	github.com/aws/aws-sdk-go v1.46.2
+	github.com/aws/aws-sdk-go v1.47.1
 	github.com/docker/docker v24.0.7+incompatible
 	github.com/shirou/gopsutil/v3 v3.23.9
 	github.com/sirupsen/logrus v1.9.3
@@ -51,9 +51,9 @@ require (
 	github.com/shoenig/go-m1cpu v0.1.6 // indirect
 	github.com/tklauser/go-sysconf v0.3.12 // indirect
 	github.com/yusufpapurcu/wmi v1.2.3 // indirect
-	golang.org/x/net v0.3.1-0.20221206200815-1e63c2f08a10 // indirect
-	golang.org/x/sys v0.12.0 // indirect
-	golang.org/x/text v0.7.0 // indirect
+	golang.org/x/net v0.17.0 // indirect
+	golang.org/x/sys v0.13.0 // indirect
+	golang.org/x/text v0.13.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect

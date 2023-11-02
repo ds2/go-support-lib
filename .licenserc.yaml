@@ -19,6 +19,7 @@ header:
     - '.idea'
     - '.*'
     - 'bom.json'
+    - 'renovate.json'
 
   comment: on-failure
 

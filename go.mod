@@ -1,6 +1,8 @@
 module gitlab.com/ds_2/go-support-lib
 
-go 1.18
+go 1.21
+
+toolchain go1.21.4
 
 require (
 	github.com/aws/aws-sdk-go v1.48.3
@@ -9,7 +11,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/stretchr/testify v1.8.4
 	github.com/vmware/govmomi v0.33.1
-	sigs.k8s.io/aws-iam-authenticator v0.6.12
+	sigs.k8s.io/aws-iam-authenticator v0.6.13
 )
 
 require (

@@ -638,6 +638,8 @@ sigs.k8s.io/aws-iam-authenticator v0.6.12 h1:XlW7djx+FqvyIysdBN60AIKBvHMr+MWVT87
 sigs.k8s.io/aws-iam-authenticator v0.6.12/go.mod h1:uh/d/yhtzJXBdevntKgTKRaabgD2T/JI/YdV+9IaycE=
 sigs.k8s.io/aws-iam-authenticator v0.6.13 h1:QSQcAkpt/hF97Ogyoz6sj3WD2twTd2cmxFb4e6Rs9gA=
 sigs.k8s.io/aws-iam-authenticator v0.6.13/go.mod h1:CnvFyzR/xeLHmUY/BD0qW6q0wp6KIwXmFp4eTfrHdP8=
+sigs.k8s.io/aws-iam-authenticator v0.6.16 h1:lC9G5R6+Ls8PwvbONHLEEdbBzB6a648V+dr+cBKNklg=
+sigs.k8s.io/aws-iam-authenticator v0.6.16/go.mod h1:CnvFyzR/xeLHmUY/BD0qW6q0wp6KIwXmFp4eTfrHdP8=
 sigs.k8s.io/json v0.0.0-20220713155537-f223a00ba0e2 h1:iXTIw73aPyC+oRdyqqvVJuloN1p0AC/kzH07hu3NE+k=
 sigs.k8s.io/json v0.0.0-20220713155537-f223a00ba0e2/go.mod h1:B8JuhiUyNFVKdsE8h686QcCxMaH6HrOAZj4vswFpcB0=
 sigs.k8s.io/structured-merge-diff/v4 v4.2.3 h1:PRbqxJClWWYMNV1dhaG4NsibJbArud9kFxnAMREiWFE=

@@ -9,8 +9,8 @@ require (
 	github.com/docker/docker v24.0.7+incompatible
 	github.com/shirou/gopsutil/v3 v3.23.12
 	github.com/sirupsen/logrus v1.9.3
-	github.com/stretchr/testify v1.8.4
-	github.com/vmware/govmomi v0.34.1
+	github.com/stretchr/testify v1.9.0
+	github.com/vmware/govmomi v0.36.2
 	sigs.k8s.io/aws-iam-authenticator v0.6.17
 )
 

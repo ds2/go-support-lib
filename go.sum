@@ -289,6 +289,8 @@ github.com/stretchr/testify v1.7.1/go.mod h1:6Fq8oRcR53rry900zMqJjRRixrwX3KX962/
 github.com/stretchr/testify v1.8.0/go.mod h1:yNjHg4UonilssWZ8iaSj1OCr/vHnekPRkoO+kdMU+MU=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
+github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=
+github.com/stretchr/testify v1.9.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 github.com/tklauser/go-sysconf v0.3.12 h1:0QaGUFOdQaIVdPgfITYzaTegZvdCjmYO52cSFAEVmqU=
 github.com/tklauser/go-sysconf v0.3.12/go.mod h1:Ho14jnntGE1fpdOqQEEaiKRpvIavV0hSfmBq8nJbHYI=
 github.com/tklauser/numcpus v0.6.1 h1:ng9scYS7az0Bk4OZLvrNXNSAO2Pxr1XXRAPyjhIx+Fk=
@@ -301,6 +303,8 @@ github.com/vmware/govmomi v0.34.0 h1:Aun71BDf1t8r3jNeUWJ3ZM+7kHbIuuNzIuxRVo5LYYU
 github.com/vmware/govmomi v0.34.0/go.mod h1:qWWT6n9mdCr/T9vySsoUqcI04sSEj4CqHXxtk/Y+Los=
 github.com/vmware/govmomi v0.34.1 h1:Hqu2Uke2itC+cNoIcFQBLEZvX9wBRTTOP04J7V1fqRw=
 github.com/vmware/govmomi v0.34.1/go.mod h1:qWWT6n9mdCr/T9vySsoUqcI04sSEj4CqHXxtk/Y+Los=
+github.com/vmware/govmomi v0.36.2 h1:fFTicZmjwPCiBJGyKLZ5Ty9JbTgBPVSXJDv1Duw0r7c=
+github.com/vmware/govmomi v0.36.2/go.mod h1:mtGWtM+YhTADHlCgJBiskSRPOZRsN9MSjPzaZLte/oQ=
 github.com/yuin/goldmark v1.1.25/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.1.27/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.1.32/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=

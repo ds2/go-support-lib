@@ -1,15 +1,13 @@
 module gitlab.com/ds_2/go-support-lib
 
-go 1.21
-
-toolchain go1.21.4
+go 1.23
 
 require (
 	github.com/aws/aws-sdk-go v1.49.13
 	github.com/docker/docker v24.0.7+incompatible
 	github.com/shirou/gopsutil/v3 v3.23.12
-	github.com/sirupsen/logrus v1.9.3
-	github.com/stretchr/testify v1.8.4
+	github.com/sirupsen/logrus v1.10.1
+	github.com/stretchr/testify v1.12.0
 	github.com/vmware/govmomi v0.34.1
 	sigs.k8s.io/aws-iam-authenticator v0.6.17
 )

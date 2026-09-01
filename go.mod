@@ -2,7 +2,7 @@ module gitlab.com/ds_2/go-support-lib
 
 go 1.21
 
-toolchain go1.21.4
+toolchain go1.27.1
 
 require (
 	github.com/aws/aws-sdk-go v1.49.13
